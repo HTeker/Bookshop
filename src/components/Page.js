@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/Page.css';
 
+import Header from './Header';
 import Navigation from './Navigation';
 import PageContent from './PageContent';
 
@@ -8,6 +9,7 @@ class Page extends Component {
 	render() {
 		return (
 			<div id={this.props.id}>
+				<Header />
 				<Navigation />
 				<PageContent>
 					{this.props.children}

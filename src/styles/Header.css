@@ -1,0 +1,44 @@
+#header-container{
+	background: linear-gradient(rgba(62, 51, 67, 0.85), rgba(62, 51, 67, 0.85)), url("../images/doodles.png");
+}
+
+#header{
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 1.5rem;
+	font-size: 14px;
+	justify-content: space-between;
+}
+
+#header .brand-link{
+	display: block;
+    width: 10rem;
+    max-width: 100%;
+}
+
+#header img{
+	max-width: 
+}
+
+#header, .right-section{
+	display: flex;
+}
+
+#header .right-section #search-input{
+	width: 500px;
+    margin: 5px;
+    padding: 10px;
+}
+
+#header .right-section #search-btn{
+	margin: 5px;
+    padding: 0px 30px;
+    background-color: #10bbd5;
+    border: none;
+    color: white;
+}
+
+#header .right-section #search-btn:hover{
+	background-color: #29d5ef;
+	cursor: pointer;
+}
