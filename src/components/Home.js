@@ -4,6 +4,7 @@ import '../styles/Home.css';
 import PageContent from './PageContent';
 import Sidebar from './Sidebar';
 import { Container, Row, Col } from 'react-grid-system';
+import CardContainer from './CardContainer';
 
 class Home extends Component {
   render() {
@@ -16,7 +17,10 @@ class Home extends Component {
                 <Sidebar />
               </Col>
               <Col md={9}>
-                Main content
+                <CardContainer>
+                  <h3>Bestselling Books</h3>
+                  
+                </CardContainer>
               </Col>
             </Row>
           </Container>
