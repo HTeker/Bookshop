@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import '../styles/Navigation.css';
 
+const links = [
+	{name: 'Home', url: '/'},
+	{name: 'Categories', url: '#'},
+	{name: 'About Us', url: '#'},
+	{name: 'Contact', url: '#'},
+	{name: 'Login', url: '/login'},
+];
+
 class Navigation extends Component {
 	render() {
 		return (
 			<div id="navigation-container">
 				<div id="navigation">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Contact</a></li>
-						<li><a href="#">Login</a></li>
+						{links.map(function(link){
+							return (<li><a href={link.url}>{link.name}</a></li>);
+						})}
 					</ul>
 
 					<div id="right-section">

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import logo from '../images/logo.svg';
 import '../styles/Home.css';
-import PageContent from './PageContent';
+import Page from './Page';
 import Sidebar from './Sidebar';
 import { Container, Row, Col } from 'react-grid-system';
 import CardContainer from './CardContainer';
 import ProductItem from './ProductItem';
-import Navigation from './Navigation';
 
 const products = [
   { id: '0132350886', name: 'Clean Code : A Handbook of Agile Software Craftsmanship', price: 19.99, imgUrl: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1323/9780132350884.jpg'},
@@ -19,36 +18,33 @@ const products = [
 class Home extends Component {
   render() {
     return (
-      <div>
-        <Navigation />
-        <PageContent>
-          <Row>
-            <Col md={3}>
-              <Sidebar />
-            </Col>
-            <Col md={9}>
-              <CardContainer>
-                <h3>Bestselling Books</h3>
-                {products.map(function(product){
-                  return(<ProductItem product={product} />);
-                })}
-              </CardContainer>
-              <CardContainer>
-                <h3>New Books</h3>
-                {products.map(function(product){
-                  return(<ProductItem product={product} />);
-                })}
-              </CardContainer>
-              <CardContainer>
-                <h3>Best Rated Books</h3>
-                {products.map(function(product){
-                  return(<ProductItem product={product} />);
-                })}
-              </CardContainer>
-            </Col>
-          </Row>
-        </PageContent>
-      </div>
+      <Page id="home">
+        <Row>
+          <Col md={3}>
+            <Sidebar />
+          </Col>
+          <Col md={9}>
+            <CardContainer>
+              <h3>Bestselling Books</h3>
+              {products.map(function(product){
+                return(<ProductItem product={product} />);
+              })}
+            </CardContainer>
+            <CardContainer>
+              <h3>New Books</h3>
+              {products.map(function(product){
+                return(<ProductItem product={product} />);
+              })}
+            </CardContainer>
+            <CardContainer>
+              <h3>Best Rated Books</h3>
+              {products.map(function(product){
+                return(<ProductItem product={product} />);
+              })}
+            </CardContainer>
+          </Col>
+        </Row>
+      </Page>
     );
   }
 }
