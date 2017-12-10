@@ -12,10 +12,10 @@ class Home extends Component {
         <PageContent>
           <Container>
             <Row>
-              <Col sm={3}>
+              <Col md={3}>
                 <Sidebar />
               </Col>
-              <Col sm={9}>
+              <Col md={9}>
                 Main content
               </Col>
             </Row>
