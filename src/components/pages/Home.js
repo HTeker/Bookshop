@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import logo from '../images/logo.svg';
-import '../styles/Home.css';
-import Page from './Page';
-import Sidebar from './Sidebar';
+import '../../styles/Home.css';
+import Page from '../Page';
+import Sidebar from '../Sidebar';
 import { Container, Row, Col } from 'react-grid-system';
-import CardContainer from './CardContainer';
-import ProductItem from './ProductItem';
+import CardContainer from '../CardContainer';
+import ProductItem from '../ProductItem';
 
 const products = [
   { id: '0132350886', name: 'Clean Code : A Handbook of Agile Software Craftsmanship', price: 19.99, imgUrl: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1323/9780132350884.jpg'},

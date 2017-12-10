@@ -5,8 +5,8 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import './styles/index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-import Home from './components/Home';
-import Login from './components/Login';
+import Home from './components/pages/Home';
+import Login from './components/pages/Login';
 
 ReactDOM.render(
 	<Router history={createBrowserHistory()}>
