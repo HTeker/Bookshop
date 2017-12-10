@@ -15,7 +15,14 @@ class Navigation extends Component {
 					</ul>
 
 					<div id="right-section">
-						Right
+						<div className="cart-container">
+							<span className="total">€ 0,00</span>
+							<a rel="nofollow" href="#" className="cart-btn">
+							    <span className="item-count">
+							        0 Items
+						        </span>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
