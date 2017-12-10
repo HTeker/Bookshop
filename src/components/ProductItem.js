@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/ProductItem.css';
-import PricePipe from '../pipes/PricePipe';
+import PipeToLocalePrice from '../pipes/PipeToLocalePrice';
 
 class ProductItem extends Component {
 	render() {
@@ -12,7 +12,7 @@ class ProductItem extends Component {
 					</a>
 				</div>
 				<h4 className="item-name"><a href={"/product/" + this.props.product.id}>{this.props.product.name}</a></h4>
-				<span className="item-price">€ {PricePipe(this.props.product.price)}</span>
+				<span className="item-price">{PipeToLocalePrice(this.props.product.price)}</span>
 			</div>
 		);
 	}

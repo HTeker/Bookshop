@@ -1,0 +1,12 @@
+#product-detail .product-image{
+	text-align: center;
+}
+
+#product-detail .product-image img{
+	max-height: 350px;
+}
+
+#product-detail .stock{
+	color: grey;
+	font-style: italic;
+}

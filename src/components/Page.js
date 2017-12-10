@@ -7,7 +7,7 @@ import PageContent from './PageContent';
 class Page extends Component {
 	render() {
 		return (
-			<div>
+			<div id={this.props.id}>
 				<Navigation />
 				<PageContent>
 					{this.props.children}

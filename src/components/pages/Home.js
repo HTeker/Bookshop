@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../styles/Home.css';
 import Page from '../Page';
 import Sidebar from '../Sidebar';
-import { Container, Row, Col } from 'react-grid-system';
+import { Row, Col } from 'react-grid-system';
 import CardContainer from '../CardContainer';
 import ProductItem from '../ProductItem';
 
