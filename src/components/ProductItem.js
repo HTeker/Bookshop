@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/ProductItem.css';
+import PricePipe from '../pipes/PricePipe';
 
 class ProductItem extends Component {
 	render() {
@@ -11,7 +12,7 @@ class ProductItem extends Component {
 					</a>
 				</div>
 				<h4 className="item-name"><a href="#">{this.props.product.name}</a></h4>
-				<span className="item-price">€ {this.props.product.price}</span>
+				<span className="item-price">€ {PricePipe(this.props.product.price)}</span>
 			</div>
 		);
 	}
