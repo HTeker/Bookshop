@@ -7,11 +7,11 @@ class ProductItem extends Component {
 		return (
 			<div className="product-item">
 				<div class="item-img">
-					<a href="#">
+					<a href={"/product/" + this.props.product.id}>
 						<img src={this.props.product.imgUrl} />
 					</a>
 				</div>
-				<h4 className="item-name"><a href="#">{this.props.product.name}</a></h4>
+				<h4 className="item-name"><a href={"/product/" + this.props.product.id}>{this.props.product.name}</a></h4>
 				<span className="item-price">€ {PricePipe(this.props.product.price)}</span>
 			</div>
 		);
