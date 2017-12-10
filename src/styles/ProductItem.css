@@ -1,6 +1,7 @@
 .product-item{
 	display: inline-block;
 	margin-right: .75rem;
+	padding: 0px 4px;
 }
 
 .product-item, .product-item .item-img img{
