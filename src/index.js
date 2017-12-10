@@ -15,7 +15,6 @@ ReactDOM.render(
 	        <Route exact path='/' component={Home} />
 	        <Route path='/login' component={Login} />
 	        <Route path='/product/:id' component={ProductDetail} />
-	        <Route path='*' component={Home} />
 	    </div>
 	</Router>
 , document.getElementById('root'));
