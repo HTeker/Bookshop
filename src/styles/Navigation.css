@@ -1,0 +1,22 @@
+#navigation-container{
+	background-color: white;
+}
+
+#navigation{
+	max-width: 1200px;
+	margin: 0 auto;
+	font-size: 16px;
+	justify-content: space-between;
+}
+
+#navigation, #right-section{
+	display: flex;
+}
+
+#navigation li{
+	display: inline;
+}
+
+#navigation li a{
+	margin: 0 1rem;
+}
