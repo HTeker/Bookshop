@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './Home.css';
+import logo from '../images/logo.svg';
+import '../styles/Home.css';
 import PageContent from './PageContent';
 import Sidebar from './Sidebar';
 import { Container, Row, Col } from 'react-grid-system';
