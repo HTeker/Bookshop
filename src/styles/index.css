@@ -4,7 +4,7 @@ html, body{
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Slabo 27px', serif;
   background-image: url("../images/circles-light.png");
 }
 
@@ -22,4 +22,38 @@ a{
 
 h1, h2, h3, h4, h5, h6{
 	margin: 10px 0px;
+}
+
+button.btn{
+	margin: 5px;
+    padding: 16px 30px;
+	border: none;
+}
+
+button.btn:hover{
+	cursor: pointer;
+}
+
+button.btn-full-width{
+	margin-left: 0;
+	margin-right: 0;
+	width: 100%;
+}
+
+button.primary-btn{
+    background-color: #10bbd5;
+    color: white;
+}
+
+button.primary-btn:hover{
+    background-color: #29d5ef;
+}
+
+button.secondary-btn{
+    background-color: #f0f0f0;
+    color: #666666;
+}
+
+button.secondary-btn:hover{
+    background-color: #cecece;
 }

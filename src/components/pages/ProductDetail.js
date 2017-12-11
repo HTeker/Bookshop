@@ -50,6 +50,8 @@ class ProductDetail extends Component {
 			          	<CardContainer>
 			          		<h1>{PipeToLocalePrice(this.state.product.price)}</h1>
 			          		<p><b>{this.state.product.deliveryDays}</b> days for delivery.</p>
+			          		<button className="btn primary-btn btn-full-width">Add to Cart</button>
+			          		<button className="btn secondary-btn btn-full-width">Add to Wishlist</button>
 			          	</CardContainer>
 			          </Col>
 			        </Row>

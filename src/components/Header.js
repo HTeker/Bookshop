@@ -13,7 +13,7 @@ class Header extends Component {
 
 					<div className="right-section">
 						<input id="search-input" type="text" placeholder="Search for books by isbn, name or description..." />
-						<button id="search-btn">Search</button>
+						<button className="btn primary-btn">Search</button>
 					</div>
 				</div>
 			</div>
