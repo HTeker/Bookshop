@@ -11,6 +11,7 @@ import ProductDetail from './components/pages/ProductDetail';
 import CategoryDetail from './components/pages/CategoryDetail';
 import Search from './components/pages/Search';
 import Cart from './components/pages/Cart';
+import Wishlist from './components/pages/customer/Wishlist';
 
 ReactDOM.render(
 	<Router history={createBrowserHistory()}>
@@ -21,6 +22,7 @@ ReactDOM.render(
 	        <Route path='/category/:id' component={CategoryDetail} />
 	        <Route path='/search/:query' component={Search} />
 	        <Route path='/cart' component={Cart} />
+	        <Route path='/wishlist' component={Wishlist} />
 	    </div>
 	</Router>
 , document.getElementById('root'));

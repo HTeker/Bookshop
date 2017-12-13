@@ -1,0 +1,9 @@
+.product-item-in-wishlist{
+	border-bottom: 1px solid #DDDDDD;
+	justify-content: space-between;
+	padding: 15px;
+}
+
+.product-item-in-wishlist{
+	display: flex;
+}
