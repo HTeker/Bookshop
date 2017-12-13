@@ -69,3 +69,13 @@ input.full-width{
     margin-left: 0px;
     margin-right: 0px;
 }
+
+.tags{
+	margin: 15px 0px;
+}
+
+.tag{
+	background-color: #f2f2f3;
+	padding: 5px;
+    margin: 5px;
+}

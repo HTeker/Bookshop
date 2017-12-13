@@ -9,20 +9,23 @@ import axios from 'axios';
 var env = process.env.NODE_ENV || 'development',
     config = require('../../config')[env];
 
-//const paramId = this.props.match.params.id;
-const product = { id: '0008164657', name: 'Bad Dad', description: "In yet another dazzling David Walliams classic, Bad Dad is a fast and furious, heart-warming.", price: 9.17, imgUrl: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0081/9780008164652.jpg', stock: 10, deliveryDays: 5 };
-
 class ProductDetail extends Component {
 	constructor(props){
 		super(props);
 
 		this.state = {
-			product: null
+			product: null,
+			categories: null
 		};
 
 		axios.get(config.api + '/product/' + this.props.match.params.id)
 		  .then(function (response) {
 		  	this.setState({product: response.data});
+		  }.bind(this));
+
+	  	axios.get(config.api + '/product/' + this.props.match.params.id + '/category')
+		  .then(function (response) {
+		  	this.setState({categories: response.data});
 		  }.bind(this));
 	}
 
@@ -39,6 +42,13 @@ class ProductDetail extends Component {
 				          		</Col>
 				          		<Col md={8}>
 				          			<h1>{this.state.product.name}</h1>
+				          			{(this.state.categories) ?
+				          				<div className="tags">
+				          					{this.state.categories.map(function(category){
+					          					return (<a href={"/category/" + category.id}><span className="tag">{category.name}</span></a>);
+					          				})}
+				          				</div>
+				          			: null }
 				          			<span className="stock">Stock: {this.state.product.stock}</span>
 				          			<p>ISBN: {this.state.product.id}</p>
 				          			<p>{this.state.product.description}</p>
