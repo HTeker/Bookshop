@@ -8,7 +8,7 @@ Show status and history of orders
 
 Admin:
 #Create Product
-Update Product
+#Update Product
 Remove Product
 Create User
 Update User
