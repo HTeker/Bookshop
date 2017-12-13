@@ -23,9 +23,7 @@ ReactDOM.render(
 	        <Route path='/category/:id' component={CategoryDetail} />
 	        <Route path='/search/:query' component={Search} />
 	        <Route path='/cart' component={Cart} />
-	        //Customer
 	        <Route path='/wishlist' component={Wishlist} />
-	        //Admin
 	        <Route path='/create-product' component={CreateProduct} />
 	    </div>
 	</Router>
