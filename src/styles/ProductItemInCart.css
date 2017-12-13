@@ -1,0 +1,24 @@
+.product-item-in-cart{
+	border-bottom: 2px solid #DDDDDD;
+	justify-content: space-between;
+}
+
+.product-item-in-cart{
+	display: flex;
+}
+
+.product-item-in-cart .quantity input{
+	width: 40px;
+}
+
+/*.product-item-in-cart{
+	justify-content: space-between;
+}
+
+.product-item-in-cart, .product-item-in-cart .item-img img{
+	max-height: 165px;
+}
+
+.product-item-in-cart, .product-item-in-cart .right-section{
+	display: flex;
+}*/

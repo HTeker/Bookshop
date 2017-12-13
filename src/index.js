@@ -10,6 +10,7 @@ import Login from './components/pages/Login';
 import ProductDetail from './components/pages/ProductDetail';
 import CategoryDetail from './components/pages/CategoryDetail';
 import Search from './components/pages/Search';
+import Cart from './components/pages/Cart';
 
 ReactDOM.render(
 	<Router history={createBrowserHistory()}>
@@ -19,6 +20,7 @@ ReactDOM.render(
 	        <Route path='/product/:id' component={ProductDetail} />
 	        <Route path='/category/:id' component={CategoryDetail} />
 	        <Route path='/search/:query' component={Search} />
+	        <Route path='/cart' component={Cart} />
 	    </div>
 	</Router>
 , document.getElementById('root'));

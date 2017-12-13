@@ -10,7 +10,7 @@
 	justify-content: space-between;
 }
 
-#navigation, .right-section{
+#navigation, #navigation .right-section{
 	display: flex;
 }
 
@@ -27,7 +27,7 @@
 	background: #EEEEEE;
 }
 
-.right-section .cart-container .total, .right-section .cart-container .cart-btn{
+.right-section .cart-container .total, #navigation .right-section .cart-container .cart-btn{
 	line-height: 2.75rem;
     padding: 0 1.25rem;
 

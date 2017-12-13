@@ -20,7 +20,7 @@
 	max-width: 
 }
 
-#header, .right-section{
+#header, #header .right-section{
 	display: flex;
 }
 

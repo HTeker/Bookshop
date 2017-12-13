@@ -6,7 +6,7 @@ class ProductItem extends Component {
 	render() {
 		return (
 			<div className="product-item">
-				<div class="item-img">
+				<div className="item-img">
 					<a href={"/product/" + this.props.product.id}>
 						<img src={this.props.product.imgUrl} />
 					</a>
