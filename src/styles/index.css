@@ -57,3 +57,15 @@ button.secondary-btn{
 button.secondary-btn:hover{
     background-color: #cecece;
 }
+
+input{
+	margin: 5px;
+    padding: 10px;
+}
+
+input.full-width{
+	box-sizing: border-box;
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+}
