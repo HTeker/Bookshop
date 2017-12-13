@@ -4,8 +4,8 @@ import '../styles/Navigation.css';
 const links = [
 	{name: 'Home', url: '/'},
 	{name: 'Categories', url: '#'},
-	{name: 'About Us', url: '#'},
-	{name: 'Contact', url: '#'},
+	{name: 'About Us', url: '#2'},
+	{name: 'Contact', url: '#3'},
 	{name: 'Login', url: '/login'},
 ];
 
@@ -16,7 +16,7 @@ class Navigation extends Component {
 				<div id="navigation">
 					<ul>
 						{links.map(function(link){
-							return (<li><a href={link.url}>{link.name}</a></li>);
+							return (<li key={link.url}><a href={link.url}>{link.name}</a></li>);
 						})}
 					</ul>
 

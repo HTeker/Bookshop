@@ -38,7 +38,7 @@ class ProductDetail extends Component {
 			          	<CardContainer>
 			          		<Row>
 			          			<Col md={4} className="product-image">
-				          			<img src={this.state.product.imgUrl} />
+				          			<img src={this.state.product.imgUrl} alt={this.state.product.name} />
 				          		</Col>
 				          		<Col md={8}>
 				          			<h1>{this.state.product.name}</h1>

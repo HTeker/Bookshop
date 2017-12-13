@@ -26,19 +26,19 @@ class Home extends Component {
             <CardContainer>
               <h3>Bestselling Books</h3>
               {products.map(function(product){
-                return(<ProductItem product={product} />);
+                return(<ProductItem product={product} key={product.id} />);
               })}
             </CardContainer>
             <CardContainer>
               <h3>New Books</h3>
               {products.map(function(product){
-                return(<ProductItem product={product} />);
+                return(<ProductItem product={product} key={product.id} />);
               })}
             </CardContainer>
             <CardContainer>
               <h3>Best Rated Books</h3>
               {products.map(function(product){
-                return(<ProductItem product={product} />);
+                return(<ProductItem product={product} key={product.id} />);
               })}
             </CardContainer>
           </Col>

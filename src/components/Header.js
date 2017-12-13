@@ -29,7 +29,7 @@ class Header extends Component {
 			<div id="header-container">
 				<div id="header">
 					<a href="/" className="brand-link">
-						<img src={logo} />
+						<img src={logo} alt="Logo" />
 					</a>
 
 					<div className="right-section">

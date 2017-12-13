@@ -14,7 +14,7 @@ class ProductItemInCart extends Component {
 				<div className="product-item">
 					<div className="item-img">
 						<a href={"/product/" + this.props.product.id}>
-							<img src={this.props.product.imgUrl} />
+							<img src={this.props.product.imgUrl} alt={this.props.product.name} />
 						</a>
 					</div>
 

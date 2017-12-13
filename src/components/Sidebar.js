@@ -23,7 +23,7 @@ class Sidebar extends Component {
       		<h3>Popular Categories</h3>
       		<ul>
             {categories.map(function(category){
-              return(<li><a href={"/category/" + category.id}>{category.name}</a></li>);
+              return(<li key={category.id}><a href={"/category/" + category.id}>{category.name}</a></li>);
             })}
       		</ul>
       	</CardContainer>
@@ -31,7 +31,7 @@ class Sidebar extends Component {
           <h3>New Categories</h3>
           <ul>
             {categories.map(function(category){
-              return(<li><a href={"/category/" + category.id}>{category.name}</a></li>);
+              return(<li key={category.id}><a href={"/category/" + category.id}>{category.name}</a></li>);
             })}
           </ul>
         </CardContainer>

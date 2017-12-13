@@ -8,7 +8,7 @@ class ProductItem extends Component {
 			<div className="product-item">
 				<div className="item-img">
 					<a href={"/product/" + this.props.product.id}>
-						<img src={this.props.product.imgUrl} />
+						<img src={this.props.product.imgUrl} alt={this.props.product.name} />
 					</a>
 				</div>
 				<h4 className="item-name"><a href={"/product/" + this.props.product.id}>{this.props.product.name}</a></h4>
