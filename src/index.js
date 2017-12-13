@@ -13,6 +13,7 @@ import Search from './components/pages/Search';
 import Cart from './components/pages/Cart';
 import Wishlist from './components/pages/customer/Wishlist';
 import CreateProduct from './components/pages/admin/CreateProduct';
+import EditProduct from './components/pages/admin/EditProduct';
 
 ReactDOM.render(
 	<Router history={createBrowserHistory()}>
@@ -25,6 +26,7 @@ ReactDOM.render(
 	        <Route path='/cart' component={Cart} />
 	        <Route path='/wishlist' component={Wishlist} />
 	        <Route path='/create-product' component={CreateProduct} />
+	        <Route path='/edit-product/:id' component={EditProduct} />
 	    </div>
 	</Router>
 , document.getElementById('root'));
