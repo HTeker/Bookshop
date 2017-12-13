@@ -4,10 +4,10 @@ Checkout
 
 Customer:
 Show status and history of orders
-Wishlist
+#Wishlist
 
 Admin:
-Create Product
+#Create Product
 Update Product
 Remove Product
 Create User
