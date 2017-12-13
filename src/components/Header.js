@@ -19,7 +19,9 @@ class Header extends Component {
 	}
 
 	search(){
-		window.location.href = "//" + window.location.host + "/search/" + this.state.query;
+		if(this.state.query){
+			window.location.href = "//" + window.location.host + "/search/" + this.state.query;
+		}
 	}
 
 	render() {
