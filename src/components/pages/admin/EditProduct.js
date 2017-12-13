@@ -57,7 +57,7 @@ class EditProduct extends Component {
 					<Col md={4}>
 					</Col>
 					<Col md={4}>
-						{(this.state) ?
+						{(this.state.product) ?
 							<CardContainer>
 								<h3>Edit Product</h3>
 								<label htmlFor="id">ISBN:</label>
