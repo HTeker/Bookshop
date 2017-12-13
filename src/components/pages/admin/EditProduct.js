@@ -28,7 +28,6 @@ class EditProduct extends Component {
 
 		axios.get(config.api + '/product/' + this.props.match.params.id)
 		  .then(function (response) {
-		  	console.log(response.data);
 		  	this.setState({product: response.data});
 		  	this.setState({id: response.data.id});
 		  	this.setState({name: response.data.name});
@@ -62,7 +61,7 @@ class EditProduct extends Component {
 							<CardContainer>
 								<h3>Edit Product</h3>
 								<label htmlFor="id">ISBN:</label>
-								<input type="text" name="id" className="full-width" value={this.state.id} readonly />
+								<input type="text" name="id" className="full-width" value={this.state.id} readOnly />
 								<label htmlFor="name">Name:</label>
 								<input type="text" name="name" placeholder="Name" className="full-width" value={this.state.name} onChange={this.handleChange.bind(this, 'name')} />
 								<label htmlFor="description">Description:</label>

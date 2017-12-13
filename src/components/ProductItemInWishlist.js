@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../styles/ProductItemInWishlist.css';
-import PipeToLocalePrice from '../pipes/PipeToLocalePrice';
 
 class ProductItemInWishlist extends Component {
 	remove(){
