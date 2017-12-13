@@ -25,7 +25,7 @@ class ProductItemInCart extends Component {
 					<br />
 					<div className="quantity">
 						<label for="quantity">Quantity</label>
-						<input type="number" name="quantity" />
+						<input type="number" name="quantity" min="0" />
 					</div>
 					<br />
 					<div>
