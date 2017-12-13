@@ -15,6 +15,7 @@ import Wishlist from './components/pages/customer/Wishlist';
 import CreateProduct from './components/pages/admin/CreateProduct';
 import EditProduct from './components/pages/admin/EditProduct';
 import CreateUser from './components/pages/admin/CreateUser';
+import EditUser from './components/pages/admin/EditUser';
 
 ReactDOM.render(
 	<Router history={createBrowserHistory()}>
@@ -29,6 +30,7 @@ ReactDOM.render(
 	        <Route path='/create-product' component={CreateProduct} />
 	        <Route path='/edit-product/:id' component={EditProduct} />
 	        <Route path='/create-user' component={CreateUser} />
+	        <Route path='/edit-user/:id' component={EditUser} />
 	    </div>
 	</Router>
 , document.getElementById('root'));

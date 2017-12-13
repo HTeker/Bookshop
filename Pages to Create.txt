@@ -11,6 +11,6 @@ Admin:
 #Update Product
 Remove Product
 #Create User
-Update User
+#Update User
 Remove User
 Show Heatmap of Previous Orders
