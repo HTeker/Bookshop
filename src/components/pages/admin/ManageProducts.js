@@ -67,7 +67,7 @@ class ManageProducts extends Component {
 							<input type="text" name="filter" placeholder="Filter..." className="full-width" value={this.state.filter} onChange={this.handleChange.bind(this, 'filter')} />
 						</CardContainer>
 						<CardContainer>
-							{(this.state.products.length != 0) ? 
+							{(this.state.products.length !== 0) ? 
 								this.state.filteredProducts.map(function(product){
 									return(<ProductItemInList product={product} key={product.id} removeHandler={this.removeItem} />);
 								}.bind(this))

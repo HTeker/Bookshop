@@ -52,7 +52,7 @@ class EditUser extends Component {
 					<Col md={4}>
 					</Col>
 					<Col md={4}>
-						{(this.state.user || 1 == 1) ?
+						{(this.state.user) ?
 							<CardContainer>
 								<h3>Create User</h3>
 								<label htmlFor="name">Name:</label>
