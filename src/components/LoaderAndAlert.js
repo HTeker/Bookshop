@@ -1,0 +1,25 @@
+import React, { Component } from 'react';
+import '../styles/LoaderAndAlert.css';
+
+class LoaderAndAlert extends Component {
+	render() {
+		return (
+			<div>
+				<br />
+				{(this.props.loading) ?
+					<div className="loader">Loading...</div>
+				: null }
+
+				{(this.props.success != "") ?
+					<div className="alert alert-success">{this.props.success}</div>
+				: null }
+
+				{(this.props.error != "") ?
+					<div className="alert alert-error">{this.props.error}</div>
+				: null }
+			</div>
+		);
+	}
+}
+
+export default LoaderAndAlert;

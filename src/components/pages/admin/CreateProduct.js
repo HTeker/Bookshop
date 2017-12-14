@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import Page from '../../Page';
 import CardContainer from '../../CardContainer';
+import LoaderAndAlert from '../../LoaderAndAlert';
 
 
 var env = process.env.NODE_ENV || 'development',
@@ -16,6 +17,10 @@ class CreateProduct extends Component {
 
 		this.state = {
 			categories: null,
+			loading: false,
+			success: '',
+			error: '',
+
 			id: '',
 			name: '',
 			description: '',
@@ -42,12 +47,21 @@ class CreateProduct extends Component {
 			deliveryDays: this.state.deliveryDays
 		};
 
+		this.setState({loading: true});
+		this.setState({success: ''});
+		this.setState({error: ''});
+		const self = this;
+
 		axios.post(config.api + '/product', form)
 		  .then(function (response) {
-		  	//this.setState({categories: response.data});
+		  	self.setState({loading: false});
+		  	self.setState({success: response.statusText});
+	  		self.setState({error: ''});
 		  })
 		  .catch(function(error){
-		  	console.error(error);
+		  	self.setState({loading: false});
+		  	self.setState({success: ''});
+		  	self.setState({error: error.response.statusText});
 		  });
 	}
 
@@ -80,6 +94,8 @@ class CreateProduct extends Component {
 							<input type="number" name="stock" placeholder="Stock" className="full-width" value={this.state.stock} onChange={this.handleChange.bind(this, 'stock')} />
 							<label htmlFor="deliveryDays">Delivery:</label>
 							<input type="number" name="deliveryDays" placeholder="Delivery days" className="full-width" value={this.state.deliveryDays} onChange={this.handleChange.bind(this, 'deliveryDays')} />
+
+							<LoaderAndAlert loading={this.state.loading} success={this.state.success} error={this.state.error} />
 
 							<button className="btn primary-btn btn-full-width" onClick={this.submit.bind(this)}>Create</button>
 						</CardContainer>
