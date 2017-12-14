@@ -16,19 +16,39 @@ class CreateProduct extends Component {
 
 		this.state = {
 			categories: null,
-			isbn: '',
+			id: '',
 			name: '',
 			description: '',
 			price: 0.00,
-			img: '',
+			imgUrl: '',
 			stock: 0,
-			delivery: 0
+			deliveryDays: 0
 		};
 
 		axios.get(config.api + '/category')
 		  .then(function (response) {
 		  	this.setState({categories: response.data});
 		  }.bind(this));
+	}
+
+	submit() {
+		const form = {
+			id: this.state.id,
+			name: this.state.name,
+			description: this.state.description,
+			price: this.state.price,
+			imgUrl: this.state.imgUrl,
+			stock: this.state.stock,
+			deliveryDays: this.state.deliveryDays
+		};
+
+		axios.post(config.api + '/product', form)
+		  .then(function (response) {
+		  	//this.setState({categories: response.data});
+		  })
+		  .catch(function(error){
+		  	console.error(error);
+		  });
 	}
 
 	handleChange(name, e) {
@@ -46,22 +66,22 @@ class CreateProduct extends Component {
 					<Col md={4}>
 						<CardContainer>
 							<h3>Create Product</h3>
-							<label htmlFor="isbn">ISBN:</label>
-							<input type="text" name="isbn" placeholder="ISBN" className="full-width" value={this.state.isbn} onChange={this.handleChange.bind(this, 'isbn')} />
+							<label htmlFor="id">ISBN:</label>
+							<input type="text" name="id" placeholder="ISBN" className="full-width" value={this.state.id} onChange={this.handleChange.bind(this, 'id')} />
 							<label htmlFor="name">Name:</label>
 							<input type="text" name="name" placeholder="Name" className="full-width" value={this.state.name} onChange={this.handleChange.bind(this, 'name')} />
 							<label htmlFor="description">Description:</label>
 							<input type="text" name="description" placeholder="Description" className="full-width" value={this.state.description} onChange={this.handleChange.bind(this, 'description')} />
 							<label htmlFor="price">Price:</label>
-							<input type="number" name="price" placeholder="Price" step="0.01" className="full-width" value={this.state.price} onChange={this.handleChange.bind(this, 'price')} />
-							<label htmlFor="img">Image URL:</label>
-							<input type="text" name="img" placeholder="Image URL" className="full-width" value={this.state.img} onChange={this.handleChange.bind(this, 'img')} />
+							<input type="number" name="price" placeholder="Price" min="0.01" step="0.01" className="full-width" value={this.state.price} onChange={this.handleChange.bind(this, 'price')} />
+							<label htmlFor="imgUrl">Image URL:</label>
+							<input type="text" name="imgUrl" placeholder="Image URL" className="full-width" value={this.state.imgUrl} onChange={this.handleChange.bind(this, 'imgUrl')} />
 							<label htmlFor="stock">Stock:</label>
 							<input type="number" name="stock" placeholder="Stock" className="full-width" value={this.state.stock} onChange={this.handleChange.bind(this, 'stock')} />
-							<label htmlFor="delivery">Delivery:</label>
-							<input type="number" name="delivery" placeholder="Delivery days" className="full-width" value={this.state.delivery} onChange={this.handleChange.bind(this, 'delivery')} />
+							<label htmlFor="deliveryDays">Delivery:</label>
+							<input type="number" name="deliveryDays" placeholder="Delivery days" className="full-width" value={this.state.deliveryDays} onChange={this.handleChange.bind(this, 'deliveryDays')} />
 
-							<button className="btn primary-btn btn-full-width">Create</button>
+							<button className="btn primary-btn btn-full-width" onClick={this.submit.bind(this)}>Create</button>
 						</CardContainer>
 					</Col>
 					<Col md={4}>
