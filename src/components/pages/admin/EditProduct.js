@@ -73,7 +73,7 @@ class EditProduct extends Component {
 
 	render() {
 		return (
-			<Page id="login">
+			<Page id="edit-product">
 				<Row>
 					<Col md={4}>
 					</Col>
@@ -91,6 +91,12 @@ class EditProduct extends Component {
 								<input type="number" name="price" placeholder="Price" step="0.01" className="full-width" value={this.state.form.price} onChange={this.handleChange.bind(this, 'price')} />
 								<label htmlFor="imgUrl">Image URL:</label>
 								<input type="text" name="imgUrl" placeholder="Image URL" className="full-width" value={this.state.form.imgUrl} onChange={this.handleChange.bind(this, 'imgUrl')} />
+
+								<label>Preview:</label>
+								<div className="img-container">
+									<img src={this.state.form.imgUrl} alt={this.state.form.name} />
+								</div>
+								
 								<label htmlFor="stock">Stock:</label>
 								<input type="number" name="stock" placeholder="Stock" className="full-width" value={this.state.form.stock} onChange={this.handleChange.bind(this, 'stock')} />
 								<label htmlFor="deliveryDays">Delivery:</label>
