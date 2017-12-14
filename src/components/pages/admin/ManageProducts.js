@@ -15,6 +15,8 @@ class ManageProducts extends Component {
 	constructor(props){
 		super(props);
 
+		this.filterProducts = this.filterProducts.bind(this);
+
 		this.state = {
 			products: [],
 			filteredProducts: [],
@@ -30,14 +32,25 @@ class ManageProducts extends Component {
 		  }.bind(this));
 	}
 
+	removeItem(product){
+		console.log("Removing from parent:");
+		console.log(product);
+	}
+
 	handleChange(name, e) {
+		console.log(this.state.products);
+		console.log(typeof this.state.products);
 		var change = {form: this.state.form};
 		change.form[name] = e.target.value;
 		this.setState(change);
 
+		this.filterProducts();
+	}
+
+	filterProducts(){
 		const products = this.state.products.filter(function(item){
-			return item.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1;
-		});
+			return item.name.toLowerCase().search(this.state.form.filter.toLowerCase()) !== -1;
+		}.bind(this));
 
 		this.setState({filteredProducts: products});
 	}
@@ -56,8 +69,8 @@ class ManageProducts extends Component {
 						<CardContainer>
 							{(this.state.products.length != 0) ? 
 								this.state.filteredProducts.map(function(product){
-									return(<ProductItemInList product={product} key={product.id} />);
-								})
+									return(<ProductItemInList product={product} key={product.id} removeHandler={this.removeItem} />);
+								}.bind(this))
 							: <p>No products yet</p> }
 						</CardContainer>
 					</Col>
