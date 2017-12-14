@@ -10,12 +10,12 @@ class LoaderAndAlert extends Component {
 					<div className="loader">Loading...</div>
 				: null }
 
-				{(this.props.success != "") ?
-					<div className="alert alert-success">{this.props.success}</div>
+				{(this.props.success) ?
+					<div className="alert alert-success">{this.props.success.statusText}</div>
 				: null }
 
-				{(this.props.error != "") ?
-					<div className="alert alert-error">{this.props.error}</div>
+				{(this.props.error) ?
+					<div className="alert alert-error">{this.props.error.statusText}</div>
 				: null }
 			</div>
 		);

@@ -17,6 +17,7 @@ class CreateProduct extends Component {
 
 		this.state = {
 			categories: null,
+
 			loading: false,
 			success: '',
 			error: '',
@@ -47,13 +48,13 @@ class CreateProduct extends Component {
 		axios.post(config.api + '/product', this.state.form)
 		  .then(function (response) {
 		  	self.setState({loading: false});
-		  	self.setState({success: response.statusText});
+		  	self.setState({success: response});
 	  		self.setState({error: ''});
 		  })
 		  .catch(function(error){
 		  	self.setState({loading: false});
 		  	self.setState({success: ''});
-		  	self.setState({error: error.response.statusText});
+		  	self.setState({error: error.response});
 		  });
 	}
 
