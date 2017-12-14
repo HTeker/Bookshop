@@ -31,7 +31,7 @@ ReactDOM.render(
 	        <Route path='/create-product' component={CreateProduct} />
 	        <Route path='/edit-product/:id' component={EditProduct} />
 	        <Route path='/create-user' component={CreateUser} />
-	        <Route path='/edit-user/:id' component={ManageProducts} />
+	        <Route path='/edit-user/:id' component={EditUser} />
 	        <Route path='/manage-products' component={ManageProducts} />
 	    </div>
 	</Router>
