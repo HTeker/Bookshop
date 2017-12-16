@@ -4,6 +4,10 @@
     border: 1px solid transparent;
 }
 
+.alert ul{
+	margin: 0;
+}
+
 .alert-success{
 	color: #3c763d;
     background-color: #dff0d8;

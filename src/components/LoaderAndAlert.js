@@ -15,7 +15,13 @@ class LoaderAndAlert extends Component {
 				: null }
 
 				{(this.props.error) ?
-					<div className="alert alert-error">{this.props.error.statusText}</div>
+					<div className="alert alert-error">
+						<ul>
+							{this.props.error.data.errors.map(function(error){
+								return (<li>{error.message}</li>);
+							})}
+						</ul>
+					</div>
 				: null }
 			</div>
 		);
