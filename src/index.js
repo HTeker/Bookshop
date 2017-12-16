@@ -22,17 +22,17 @@ ReactDOM.render(
 	<Router history={createBrowserHistory()}>
 	    <div>
 	        <Route exact path='/' component={Home} />
-	        <Route path='/login' component={Login} />
 	        <Route path='/product/:id' component={ProductDetail} />
+	        <Route path='/product/create' component={CreateProduct} />
+	        <Route path='/product/:id/edit' component={EditProduct} />
+	        <Route path='/products/manage' component={ManageProducts} />
 	        <Route path='/category/:id' component={CategoryDetail} />
+	        <Route path='/user/create' component={CreateUser} />
+	        <Route path='/user/:id/edit' component={EditUser} />
+	        <Route path='/login' component={Login} />
 	        <Route path='/search/:query' component={Search} />
 	        <Route path='/cart' component={Cart} />
 	        <Route path='/wishlist' component={Wishlist} />
-	        <Route path='/create-product' component={CreateProduct} />
-	        <Route path='/edit-product/:id' component={EditProduct} />
-	        <Route path='/create-user' component={CreateUser} />
-	        <Route path='/edit-user/:id' component={EditUser} />
-	        <Route path='/manage-products' component={ManageProducts} />
 	    </div>
 	</Router>
 , document.getElementById('root'));

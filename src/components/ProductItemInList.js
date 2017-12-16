@@ -10,7 +10,7 @@ class ProductItemInList extends Component {
 	render() {
 		return (
 			<div className="product-item-in-list">
-				<a href={"/edit-product/" + this.props.product.id}><h4>{this.props.product.name}</h4></a>
+				<a href={"/product/" + this.props.product.id + "/edit"}><h4>{this.props.product.name}</h4></a>
 				<button className="btn secondary-btn" onClick={this.removeItem.bind(this)}>Remove</button>
 			</div>
 		);
