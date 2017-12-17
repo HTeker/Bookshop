@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route } from 'react-router';
+import { Router, Route, Switch } from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
 import './styles/index.css';
 import registerServiceWorker from './registerServiceWorker';
@@ -14,6 +14,7 @@ import ManageProducts from './components/pages/admin/ManageProducts';
 
 import CategoryDetail from './components/pages/CategoryDetail';
 import CreateCategory from './components/pages/admin/CreateCategory';
+import EditCategory from './components/pages/admin/EditCategory';
 
 import CreateUser from './components/pages/admin/CreateUser';
 import EditUser from './components/pages/admin/EditUser';
@@ -25,21 +26,23 @@ import Wishlist from './components/pages/customer/Wishlist';
 
 ReactDOM.render(
 	<Router history={createBrowserHistory()}>
-	    <div>
+	    <Switch>
 	        <Route exact path='/' component={Home} />
-	        <Route path='/product/:id' component={ProductDetail} />
+	        <Route path='/product/manage' component={ManageProducts} />
 	        <Route path='/product/create' component={CreateProduct} />
 	        <Route path='/product/:id/edit' component={EditProduct} />
-	        <Route path='/products/manage' component={ManageProducts} />
-	        <Route path='/category/:id' component={CategoryDetail} />
+	        <Route path='/product/:id' component={ProductDetail} />
 	        <Route path='/category/create' component={CreateCategory} />
+	        <Route path='/category/:id/edit' component={EditCategory} />
+	        <Route path='/category/:id' component={CategoryDetail} />
 	        <Route path='/user/create' component={CreateUser} />
 	        <Route path='/user/:id/edit' component={EditUser} />
 	        <Route path='/login' component={Login} />
 	        <Route path='/search/:query' component={Search} />
 	        <Route path='/cart' component={Cart} />
 	        <Route path='/wishlist' component={Wishlist} />
-	    </div>
+	        <Route path='*' component={Home} />
+	    </Switch>
 	</Router>
 , document.getElementById('root'));
 
