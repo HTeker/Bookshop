@@ -21,13 +21,7 @@ class CreateCategory extends Component {
 			error: '',
 
 			form: {
-				id: '',
-				name: '',
-				description: '',
-				price: 0.00,
-				imgUrl: '',
-				stock: 0,
-				deliveryDays: 0
+				name: ''
 			}
 		};
 	}
@@ -59,7 +53,7 @@ class CreateCategory extends Component {
 
 	render() {
 		return (
-			<Page id="create-product">
+			<Page id="create-category">
 				<Row>
 					<Col md={4}>
 					</Col>
