@@ -6,17 +6,21 @@ import './styles/index.css';
 import registerServiceWorker from './registerServiceWorker';
 
 import Home from './components/pages/Home';
-import Login from './components/pages/Login';
+
 import ProductDetail from './components/pages/ProductDetail';
+import CreateProduct from './components/pages/admin/CreateProduct';
+import EditProduct from './components/pages/admin/EditProduct';
+import ManageProducts from './components/pages/admin/ManageProducts';
+
 import CategoryDetail from './components/pages/CategoryDetail';
+
+import CreateUser from './components/pages/admin/CreateUser';
+import EditUser from './components/pages/admin/EditUser';
+
+import Login from './components/pages/Login';
 import Search from './components/pages/Search';
 import Cart from './components/pages/Cart';
 import Wishlist from './components/pages/customer/Wishlist';
-import CreateProduct from './components/pages/admin/CreateProduct';
-import EditProduct from './components/pages/admin/EditProduct';
-import CreateUser from './components/pages/admin/CreateUser';
-import EditUser from './components/pages/admin/EditUser';
-import ManageProducts from './components/pages/admin/ManageProducts';
 
 ReactDOM.render(
 	<Router history={createBrowserHistory()}>
