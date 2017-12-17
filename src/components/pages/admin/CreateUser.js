@@ -1,29 +1,66 @@
 import React, { Component } from 'react';
 import '../../../styles/CreateUser.css';
 import { Row, Col } from 'react-grid-system';
+import axios from 'axios';
 
 import Page from '../../Page';
 import CardContainer from '../../CardContainer';
+import LoaderAndAlert from '../../LoaderAndAlert';
+
+var env = process.env.NODE_ENV || 'development',
+    config = require('../../../config')[env];
 
 class CreateUser extends Component {
 	constructor(props){
 		super(props);
 
 		this.state = {
-			name: '',
-			email: '',
-			password: '',
-			passwordConfirm: '',
-			street: '',
-			number: '',
-			city: '',
-			zipcode: ''
+			loading: false,
+			success: '',
+			error: '',
+
+			form: {
+				name: '',
+				email: '',
+				password: '',
+				passwordConfirm: '',
+				street: '',
+				number: '',
+				city: '',
+				zipcode: ''
+			}
+
 		};
 	}
 
+	submit() {
+		if(this.state.form.password === this.state.form.passwordConfirm){
+			this.setState({loading: true});
+			this.setState({success: ''});
+			this.setState({error: ''});
+			const self = this;
+
+			axios.post(config.api + '/user', this.state.form)
+			  .then(function (response) {
+			  	self.setState({loading: false});
+			  	self.setState({success: response});
+		  		self.setState({error: ''});
+			  })
+			  .catch(function(error){
+			  	self.setState({loading: false});
+			  	self.setState({success: ''});
+			  	self.setState({error: error.response});
+			  });
+		}else{
+			this.setState({loading: false});
+		  	this.setState({success: ''});
+		  	this.setState({error: {data: {errors: [{message: 'Password confirmation does not match'}]}}});
+		}
+	}
+
 	handleChange(name, e) {
-		var change = {};
-		change[name] = e.target.value;
+		var change = {form: this.state.form};
+		change.form[name] = e.target.value;
 		this.setState(change);
 	}
 
@@ -53,7 +90,9 @@ class CreateUser extends Component {
 							<label htmlFor="zipcode">Zipcode:</label>
 							<input type="text" name="zipcode" placeholder="Zipcode" className="full-width" value={this.state.zipcode} onChange={this.handleChange.bind(this, 'zipcode')} />
 
-							<button className="btn primary-btn btn-full-width">Create</button>
+							<LoaderAndAlert loading={this.state.loading} success={this.state.success} error={this.state.error} />
+
+							<button className="btn primary-btn btn-full-width" onClick={this.submit.bind(this)}>Create</button>
 						</CardContainer>
 					</Col>
 					<Col md={4}>
