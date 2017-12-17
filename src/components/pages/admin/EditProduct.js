@@ -16,7 +16,6 @@ class EditProduct extends Component {
 		super(props);
 
 		this.state = {
-			product: null,
 			categories: null,
 
 			loading: false,
