@@ -1,0 +1,20 @@
+import React, { Component } from 'react';
+import '../styles/UserItemInList.css';
+
+class UserItemInList extends Component {
+	removeItem(){
+		console.log("Removing: " + this.props.user.name);
+		this.props.removeHandler(this.props.user);
+	}
+
+	render() {
+		return (
+			<div className="user-item-in-list">
+				<a href={"/user/" + this.props.user.id + "/edit"}><h4>{this.props.user.name}</h4></a>
+				<button className="btn secondary-btn" onClick={this.removeItem.bind(this)}>Remove</button>
+			</div>
+		);
+	}
+}
+
+export default UserItemInList;

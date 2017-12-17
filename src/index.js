@@ -19,6 +19,7 @@ import ManageCategories from './components/pages/admin/ManageCategories';
 
 import CreateUser from './components/pages/admin/CreateUser';
 import EditUser from './components/pages/admin/EditUser';
+import ManageUsers from './components/pages/admin/ManageUsers';
 
 import Login from './components/pages/Login';
 import Search from './components/pages/Search';
@@ -37,6 +38,7 @@ ReactDOM.render(
 	        <Route path='/category/create' component={CreateCategory} />
 	        <Route path='/category/:id/edit' component={EditCategory} />
 	        <Route path='/category/:id' component={CategoryDetail} />
+	        <Route path='/user/manage' component={ManageUsers} />
 	        <Route path='/user/create' component={CreateUser} />
 	        <Route path='/user/:id/edit' component={EditUser} />
 	        <Route path='/login' component={Login} />
