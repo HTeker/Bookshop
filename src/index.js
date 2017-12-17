@@ -15,6 +15,7 @@ import ManageProducts from './components/pages/admin/ManageProducts';
 import CategoryDetail from './components/pages/CategoryDetail';
 import CreateCategory from './components/pages/admin/CreateCategory';
 import EditCategory from './components/pages/admin/EditCategory';
+import ManageCategories from './components/pages/admin/ManageCategories';
 
 import CreateUser from './components/pages/admin/CreateUser';
 import EditUser from './components/pages/admin/EditUser';
@@ -32,6 +33,7 @@ ReactDOM.render(
 	        <Route path='/product/create' component={CreateProduct} />
 	        <Route path='/product/:id/edit' component={EditProduct} />
 	        <Route path='/product/:id' component={ProductDetail} />
+	        <Route path='/category/manage' component={ManageCategories} />
 	        <Route path='/category/create' component={CreateCategory} />
 	        <Route path='/category/:id/edit' component={EditCategory} />
 	        <Route path='/category/:id' component={CategoryDetail} />
