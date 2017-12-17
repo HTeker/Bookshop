@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../styles/UserItemInList.css';
 
 class UserItemInList extends Component {
 	removeItem(){

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../styles/Sidebar.css';
 import CardContainer from './CardContainer';
 
 const categories = [

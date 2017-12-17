@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../styles/ProductItemInList.css';
 
 class ProductItemInList extends Component {
 	removeItem(){

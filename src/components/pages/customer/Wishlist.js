@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../../../styles/Wishlist.css';
 import { Row, Col } from 'react-grid-system';
 
 import Page from '../../Page';

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../../../styles/EditCategory.css';
 import { Row, Col } from 'react-grid-system';
 import axios from 'axios';
 
