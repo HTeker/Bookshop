@@ -8,6 +8,10 @@
 	margin: 0;
 }
 
+.alert ul li{
+    list-style-type: initial;
+}
+
 .alert-success{
 	color: #3c763d;
     background-color: #dff0d8;
