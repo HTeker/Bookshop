@@ -3,10 +3,20 @@ import '../styles/Navigation.css';
 
 const links = [
 	{name: 'Home', url: '/'},
-	{name: 'Categories', url: '#'},
-	{name: 'About Us', url: '#2'},
-	{name: 'Contact', url: '#3'},
 	{name: 'Login', url: '/login'},
+	{name: 'Products', url: '/product'},
+	{name: 'Product', url: '#', links: [
+		{name: 'Manage', url: '/product/manage'},
+		{name: 'Create', url: '/product/create'},
+	]},
+	{name: 'Category', url: '#', links: [
+		{name: 'Manage', url: '/category/manage'},
+		{name: 'Create', url: '/category/create'},
+	]},
+	{name: 'User', url: '#', links: [
+		{name: 'Manage', url: '/user/manage'},
+		{name: 'Create', url: '/user/create'},
+	]}
 ];
 
 class Navigation extends Component {
@@ -16,7 +26,20 @@ class Navigation extends Component {
 				<div id="navigation">
 					<ul>
 						{links.map(function(link){
-							return (<li key={link.url}><a href={link.url}>{link.name}</a></li>);
+							if(link.links){
+								return (
+									<li key={link.url}>
+										<a href={link.url}>{link.name}</a>
+										<ul>
+											{link.links.map(function(childLink){
+												return (<li key={childLink.url}><a href={childLink.url}>{childLink.name}</a></li>);			
+											})}
+										</ul>
+									</li>
+								);
+							}else{
+								return (<li key={link.url}><a href={link.url}>{link.name}</a></li>);
+							}
 						})}
 					</ul>
 

@@ -16,10 +16,25 @@
 
 #navigation li{
 	display: inline;
+	position: relative;
 }
 
 #navigation li a{
 	margin: 0 1rem;
+}
+
+#navigation li ul{
+	position: absolute;
+	top: 20px;
+	left: 0;
+	background-color: white;
+	box-shadow: 0rem 0rem 0.3rem rgba(0,0,0,0.2);
+	z-index: 100;
+}
+
+#navigation li ul li{
+	display: block;
+	padding: 10px 0px;
 }
 
 .right-section .cart-container{
