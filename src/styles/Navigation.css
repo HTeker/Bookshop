@@ -10,6 +10,10 @@
 	justify-content: space-between;
 }
 
+#navigation ul{
+	display: inherit;
+}
+
 #navigation, #navigation .right-section{
 	display: flex;
 }
@@ -20,8 +24,9 @@
 }
 
 #navigation li.menu-dropdown a span.arrow{
-	position: relative;
+	position: absolute;
     bottom: -12px;
+    right: 0px;
     font-size: 16pt;
 }
 

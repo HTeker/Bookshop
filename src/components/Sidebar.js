@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
 import CardContainer from './CardContainer';
+import axios from 'axios';
 
-const categories = [
-  {id: 1, name: 'Category #1'},
-  {id: 2, name: 'Category #2'},
-  {id: 3, name: 'Category #3'},
-  {id: 4, name: 'Category #4'},
-  {id: 5, name: 'Category #5'},
-  {id: 6, name: 'Category #6'},
-  {id: 7, name: 'Category #7'},
-  {id: 8, name: 'Category #8'},
-  {id: 9, name: 'Category #9'},
-  {id: 10, name: 'Category #10'}
-];
+var env = process.env.NODE_ENV || 'development',
+    config = require('../config')[env];
 
 class Sidebar extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      categories: []
+    };
+
+    axios.get(config.api + '/category')
+      .then(function (response) {
+        this.setState({categories: response.data});
+      }.bind(this));
+  }
+
   render() {
     return (
       <div>
       	<CardContainer>
       		<h3>Popular Categories</h3>
       		<ul>
-            {categories.map(function(category){
+            {this.state.categories.map(function(category){
               return(<li key={category.id}><a href={"/category/" + category.id}>{category.name}</a></li>);
             })}
       		</ul>
@@ -29,7 +33,7 @@ class Sidebar extends Component {
         <CardContainer>
           <h3>New Categories</h3>
           <ul>
-            {categories.map(function(category){
+            {this.state.categories.map(function(category){
               return(<li key={category.id}><a href={"/category/" + category.id}>{category.name}</a></li>);
             })}
           </ul>
