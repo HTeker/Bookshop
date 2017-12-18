@@ -19,13 +19,20 @@
 	position: relative;
 }
 
+#navigation li.menu-dropdown a span.arrow{
+	position: relative;
+    bottom: -12px;
+    font-size: 16pt;
+}
+
 #navigation li a{
 	margin: 0 1rem;
 }
 
 #navigation li ul{
+	display: none;
 	position: absolute;
-	top: 20px;
+	top: 17px;
 	left: 0;
 	background-color: white;
 	box-shadow: 0rem 0rem 0.3rem rgba(0,0,0,0.2);
