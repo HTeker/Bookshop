@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/Navigation.css';
 
 import CartHelper from '../helpers/CartHelper';
+import PipeToLocalePrice from '../pipes/PipeToLocalePrice';
 
 import $ from 'jquery';
 
@@ -28,7 +29,8 @@ class Navigation extends Component {
 		super(props);
 
 		this.state = {
-			numberOfItemsInCart: CartHelper.getAllProducts().length
+			numberOfItemsInCart: CartHelper.getAllProducts().length,
+			totalPrice: CartHelper.getTotalPrice()
 		};
 	}
 
@@ -65,7 +67,7 @@ class Navigation extends Component {
 
 					<div className="right-section">
 						<div className="cart-container">
-							<span className="total">€ 0,00</span>
+							<span className="total">{PipeToLocalePrice(this.props.totalPrice || this.state.totalPrice)}</span>
 							<a href="/cart" className="cart-btn">
 							    <span className="item-count">
 							        {this.props.numberOfItemsInCart || this.state.numberOfItemsInCart} Items

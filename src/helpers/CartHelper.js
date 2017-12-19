@@ -41,6 +41,17 @@ class CartHelper{
 	static getAllProducts(){
 		return JSON.parse(localStorage.getItem('cart')) || [];
 	}
+
+	static getTotalPrice(){
+		var cart = CartHelper.getAllProducts(),
+			total = 0;
+
+		for(var i = 0; i < cart.length; i++){
+			total += cart[i].product.price * cart[i].quantity;
+		}
+
+		return total;
+	}
 }
 
 export default CartHelper;

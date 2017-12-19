@@ -10,7 +10,7 @@ class Page extends Component {
 		return (
 			<div id={this.props.id}>
 				<Header />
-				<Navigation numberOfItemsInCart={this.props.numberOfItemsInCart} />
+				<Navigation numberOfItemsInCart={this.props.numberOfItemsInCart} totalPrice={this.props.totalPrice} />
 				<PageContent>
 					{this.props.children}
 				</PageContent>

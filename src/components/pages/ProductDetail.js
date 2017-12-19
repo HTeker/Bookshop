@@ -18,7 +18,8 @@ class ProductDetail extends Component {
 		this.state = {
 			product: null,
 			categories: null,
-			numberOfItemsInCart: CartHelper.getAllProducts().length
+			numberOfItemsInCart: CartHelper.getAllProducts().length,
+			totalPrice: CartHelper.getTotalPrice()
 		};
 
 		axios.get(config.api + '/product/' + this.props.match.params.id)
@@ -35,11 +36,12 @@ class ProductDetail extends Component {
 	addProductToCartHelper(){
 		CartHelper.addProduct(this.state.product);
 		this.setState({numberOfItemsInCart: CartHelper.getAllProducts().length});
+		this.setState({totalPrice: CartHelper.getTotalPrice()});
 	}
 
 	render() {
 		return (
-			<Page id="product-detail" numberOfItemsInCart={this.state.numberOfItemsInCart}>
+			<Page id="product-detail" numberOfItemsInCart={this.state.numberOfItemsInCart} totalPrice={this.state.totalPrice}>
 				{(this.state.product) ?
 					<Row>
 			          <Col md={9}>

@@ -3,6 +3,7 @@ import { Row, Col } from 'react-grid-system';
 import axios from 'axios';
 
 import CartHelper from '../../helpers/CartHelper';
+import PipeToLocalePrice from '../../pipes/PipeToLocalePrice';
 
 import Page from '../Page';
 import CardContainer from '../CardContainer';
@@ -20,7 +21,8 @@ class Cart extends Component {
 
 		this.state = {
 			products: CartHelper.getAllProducts(),
-			numberOfItemsInCart: CartHelper.getAllProducts().length
+			numberOfItemsInCart: CartHelper.getAllProducts().length,
+			totalPrice: CartHelper.getTotalPrice()
 		};
 	}
 
@@ -33,11 +35,12 @@ class Cart extends Component {
 	onItemChange(){
 		this.setState({products: CartHelper.getAllProducts()});
 		this.setState({numberOfItemsInCart: CartHelper.getAllProducts().length});
+		this.setState({totalPrice: CartHelper.getTotalPrice()});
 	}
 
 	render() {
 		return (
-			<Page id="search" numberOfItemsInCart={this.state.numberOfItemsInCart}>
+			<Page id="search" numberOfItemsInCart={this.state.numberOfItemsInCart} totalPrice={this.state.totalPrice}>
 				<Row>
 					<Col>
 						<CardContainer>
@@ -46,6 +49,8 @@ class Cart extends Component {
 							{this.state.products.map(function(product){
 								return(<ProductItemInCart product={product.product} key={product.product.id} quantity={product.quantity} changeHandler={this.onItemChange}  />);
 							}.bind(this))}
+							<br />
+							<div>Total: <b>{PipeToLocalePrice(this.state.totalPrice)}</b></div>
 							<br />
 							<button className="btn primary-btn" onClick={this.checkout.bind(this)}>Checkout</button>
 						</CardContainer>
