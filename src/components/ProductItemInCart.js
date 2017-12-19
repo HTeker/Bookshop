@@ -16,7 +16,23 @@ class ProductItemInCart extends Component {
 
 	removeProductFromCartHelper(){
 		CartHelper.removeProduct(this.state.product);
-		this.props.removeHandler();
+		this.props.changeHandler();
+	}
+
+	handleChange(name, e) {
+		var change = {};
+			change[name] = e.target.value;
+
+		if(name == 'quantity'){
+			CartHelper.changeQuantity(this.state.product, e.target.value);
+			this.props.changeHandler();
+
+			if(e.target.value > 0){
+				this.setState(change);
+			}
+		}else{
+			this.setState(change);
+		}
 	}
 
 	render() {
@@ -37,7 +53,7 @@ class ProductItemInCart extends Component {
 					<br />
 					<div className="quantity">
 						<label for="quantity">Quantity</label>
-						<input type="number" name="quantity" min="0" value={this.state.quantity} />
+						<input type="number" name="quantity" min="0" value={this.state.quantity} onChange={this.handleChange.bind(this, 'quantity')} />
 					</div>
 					<br />
 					<div>

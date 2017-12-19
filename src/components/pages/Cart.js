@@ -16,7 +16,7 @@ class Cart extends Component {
 	constructor(props){
 		super(props);
 
-		this.onItemRemoved = this.onItemRemoved.bind(this);
+		this.onItemChange = this.onItemChange.bind(this);
 
 		this.state = {
 			products: CartHelper.getAllProducts()
@@ -29,7 +29,7 @@ class Cart extends Component {
 		}
 	}
 
-	onItemRemoved(){
+	onItemChange(){
 		this.setState({products: CartHelper.getAllProducts()});
 	}
 
@@ -42,7 +42,7 @@ class Cart extends Component {
 							<h3>Your Cart</h3>
 							<br />
 							{this.state.products.map(function(product){
-								return(<ProductItemInCart product={product.product} key={product.product.id} quantity={product.quantity} removeHandler={this.onItemRemoved}  />);
+								return(<ProductItemInCart product={product.product} key={product.product.id} quantity={product.quantity} changeHandler={this.onItemChange}  />);
 							}.bind(this))}
 							<br />
 							<button className="btn primary-btn" onClick={this.checkout.bind(this)}>Checkout</button>

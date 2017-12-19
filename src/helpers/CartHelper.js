@@ -20,10 +20,22 @@ class CartHelper{
 		for(var i = 0; i < cart.length; i++){
 			if(cart[i].product.id == product.id){
 				cart.splice(i, 1);
+				localStorage.setItem('cart', JSON.stringify(cart));
+				return;
 			}
 		}
+	}
 
-		localStorage.setItem('cart', JSON.stringify(cart));
+	static changeQuantity(product, newQuantity){
+		var cart = CartHelper.getAllProducts();
+
+		for(var i = 0; i < cart.length; i++){
+			if(cart[i].product.id == product.id && newQuantity > 0){
+				cart[i].quantity = newQuantity;
+				localStorage.setItem('cart', JSON.stringify(cart));
+				return;
+			}
+		}
 	}
 
 	static getAllProducts(){
