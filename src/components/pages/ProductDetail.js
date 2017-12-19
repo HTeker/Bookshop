@@ -6,6 +6,8 @@ import CardContainer from '../CardContainer';
 import PipeToLocalePrice from '../../pipes/PipeToLocalePrice';
 import axios from 'axios';
 
+import CartHelper from '../../helpers/CartHelper';
+
 var env = process.env.NODE_ENV || 'development',
     config = require('../../config')[env];
 
@@ -27,6 +29,10 @@ class ProductDetail extends Component {
 		  .then(function (response) {
 		  	this.setState({categories: response.data});
 		  }.bind(this));
+	}
+
+	addProductToCartHelper(){
+		CartHelper.addProduct(this.state.product);
 	}
 
 	render() {
@@ -60,7 +66,7 @@ class ProductDetail extends Component {
 			          	<CardContainer>
 			          		<h1>{PipeToLocalePrice(this.state.product.price)}</h1>
 			          		<p><b>{this.state.product.deliveryDays}</b> days for delivery.</p>
-			          		<button className="btn primary-btn btn-full-width">Add to Cart</button>
+			          		<button className="btn primary-btn btn-full-width" onClick={this.addProductToCartHelper.bind(this)}>Add to Cart</button>
 			          		<button className="btn secondary-btn btn-full-width">Add to Wishlist</button>
 			          	</CardContainer>
 			          </Col>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Row, Col } from 'react-grid-system';
 import axios from 'axios';
 
+import CartHelper from '../../helpers/CartHelper';
+
 import Page from '../Page';
 import CardContainer from '../CardContainer';
 import ProductItemInCart from '../ProductItemInCart';
@@ -15,13 +17,8 @@ class Cart extends Component {
 		super(props);
 
 		this.state = {
-			products: null
+			products: CartHelper.getAllProducts()
 		};
-
-		axios.get(config.api + '/product')
-		  .then(function (response) {
-		  	this.setState({products: response.data});
-		  }.bind(this));
 	}
 
 	checkout(){
@@ -38,11 +35,9 @@ class Cart extends Component {
 						<CardContainer>
 							<h3>Your Cart</h3>
 							<br />
-							{(this.state.products) ?
-								this.state.products.map(function(product){
-									return(<ProductItemInCart product={product} quantity={5} />);
-								})
-							: null }
+							{this.state.products.map(function(product){
+								return(<ProductItemInCart product={product.product} key={product.product.id} quantity={product.quantity}  />);
+							})}
 							<br />
 							<button className="btn primary-btn" onClick={this.checkout.bind(this)}>Checkout</button>
 						</CardContainer>
