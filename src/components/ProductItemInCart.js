@@ -16,7 +16,7 @@ class ProductItemInCart extends Component {
 
 	removeProductFromCartHelper(){
 		CartHelper.removeProduct(this.state.product);
-		this.props.removeHandler(this.state.product);
+		this.props.removeHandler();
 	}
 
 	render() {
