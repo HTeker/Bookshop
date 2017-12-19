@@ -19,7 +19,8 @@ class Cart extends Component {
 		this.onItemChange = this.onItemChange.bind(this);
 
 		this.state = {
-			products: CartHelper.getAllProducts()
+			products: CartHelper.getAllProducts(),
+			numberOfItemsInCart: CartHelper.getAllProducts().length
 		};
 	}
 
@@ -31,11 +32,12 @@ class Cart extends Component {
 
 	onItemChange(){
 		this.setState({products: CartHelper.getAllProducts()});
+		this.setState({numberOfItemsInCart: CartHelper.getAllProducts().length});
 	}
 
 	render() {
 		return (
-			<Page id="search">
+			<Page id="search" numberOfItemsInCart={this.state.numberOfItemsInCart}>
 				<Row>
 					<Col>
 						<CardContainer>

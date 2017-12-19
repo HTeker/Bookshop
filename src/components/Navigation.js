@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../styles/Navigation.css';
 
+import CartHelper from '../helpers/CartHelper';
+
 import $ from 'jquery';
 
 const links = [
@@ -22,6 +24,14 @@ const links = [
 ];
 
 class Navigation extends Component {
+	constructor(props){
+		super(props);
+
+		this.state = {
+			numberOfItemsInCart: CartHelper.getAllProducts().length
+		};
+	}
+
 	componentDidMount(){
 		$('.menu-dropdown').hover(function(e){
 			$(this).children('ul').show();
@@ -58,7 +68,7 @@ class Navigation extends Component {
 							<span className="total">€ 0,00</span>
 							<a href="/cart" className="cart-btn">
 							    <span className="item-count">
-							        0 Items
+							        {this.props.numberOfItemsInCart || this.state.numberOfItemsInCart} Items
 						        </span>
 							</a>
 						</div>
