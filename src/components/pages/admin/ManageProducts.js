@@ -20,20 +20,21 @@ class ManageProducts extends Component {
 			products: [],
 			filteredProducts: [],
 			form: {
-				filter: null
+				filter: ""
 			}
 		};
 
-		axios.get(config.api + '/product')
-		  .then(function (response) {
-		  	this.setState({products: response.data});
-		  	this.setState({filteredProducts: response.data});
-		  }.bind(this));
+		this.refreshData();
 	}
 
 	removeItem(product){
 		console.log("Removing from parent:");
 		console.log(product);
+
+		axios.delete(config.api + '/product/' + product.id)
+			.then(function(response){
+				this.refreshData();
+			}.bind(this));
 	}
 
 	handleChange(name, e) {
@@ -44,6 +45,15 @@ class ManageProducts extends Component {
 		this.setState(change);
 
 		this.filterProducts();
+	}
+
+	refreshData(){
+		axios.get(config.api + '/product')
+		  .then(function (response) {
+		  	this.setState({products: response.data}, () => {
+				this.filterProducts();
+			});
+		  }.bind(this));
 	}
 
 	filterProducts(){
@@ -68,7 +78,7 @@ class ManageProducts extends Component {
 						<CardContainer>
 							{(this.state.products.length !== 0) ? 
 								this.state.filteredProducts.map(function(product){
-									return(<ProductItemInList product={product} key={product.id} removeHandler={this.removeItem} />);
+									return(<ProductItemInList product={product} key={product.id} removeHandler={this.removeItem.bind(this)} />);
 								}.bind(this))
 							: <p>No products yet</p> }
 						</CardContainer>
