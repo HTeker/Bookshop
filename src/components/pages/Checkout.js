@@ -5,6 +5,7 @@ import '../../styles/Checkout.css';
 
 import CartHelper from '../../helpers/CartHelper';
 import PipeToLocalePrice from '../../pipes/PipeToLocalePrice';
+import LoaderAndAlert from '../LoaderAndAlert';
 
 import Page from '../Page';
 import CardContainer from '../CardContainer';
@@ -16,8 +17,33 @@ class Checkout extends Component {
 
 		this.state = {
 			products: CartHelper.getAllProducts(),
-			totalPrice: CartHelper.getTotalPrice()
+			totalPrice: CartHelper.getTotalPrice(),
+
+			loading: false,
+			success: '',
+			error: '',
+
+			form: {
+				name: '',
+				email: '',
+				password: '',
+				passwordConfirm: '',
+				street: '',
+				number: '',
+				city: '',
+				zipcode: ''
+			}
 		};
+	}
+
+	submit(){
+
+	}
+
+	handleChange(name, e) {
+		var change = {form: this.state.form};
+		change.form[name] = e.target.value;
+		this.setState(change);
 	}
 
 	render() {
@@ -27,7 +53,26 @@ class Checkout extends Component {
 					<Col md={8}>
 						<CardContainer>
 							<h3>Checkout</h3>
+							<label htmlFor="name">Name:</label>
+							<input type="text" name="name" placeholder="Name" className="full-width" value={this.state.name} onChange={this.handleChange.bind(this, 'name')} />
+							<label htmlFor="email">E-mail:</label>
+							<input type="email" name="email" placeholder="E-mail" className="full-width" value={this.state.email} onChange={this.handleChange.bind(this, 'email')} />
+							<label htmlFor="password">Password:</label>
+							<input type="password" name="password" placeholder="Password" step="0.01" className="full-width" value={this.state.password} onChange={this.handleChange.bind(this, 'password')} />
+							<label htmlFor="passwordConfirm">Password Confirm:</label>
+							<input type="password" name="passwordConfirm" placeholder="Password Confirm" className="full-width" value={this.state.passwordConfirm} onChange={this.handleChange.bind(this, 'passwordConfirm')} />
+							<label htmlFor="street">Street:</label>
+							<input type="text" name="street" placeholder="Street" className="full-width" value={this.state.street} onChange={this.handleChange.bind(this, 'street')} />
+							<label htmlFor="number">Number:</label>
+							<input type="text" name="number" placeholder="Number" className="full-width" value={this.state.number} onChange={this.handleChange.bind(this, 'number')} />
+							<label htmlFor="city">City:</label>
+							<input type="text" name="city" placeholder="City" className="full-width" value={this.state.city} onChange={this.handleChange.bind(this, 'city')} />
+							<label htmlFor="zipcode">Zipcode:</label>
+							<input type="text" name="zipcode" placeholder="Zipcode" className="full-width" value={this.state.zipcode} onChange={this.handleChange.bind(this, 'zipcode')} />
 
+							<LoaderAndAlert loading={this.state.loading} success={this.state.success} error={this.state.error} />
+
+							<button className="btn primary-btn btn-full-width" onClick={this.submit.bind(this)}>Order</button>
 						</CardContainer>
 					</Col>
 					<Col md={4}>
