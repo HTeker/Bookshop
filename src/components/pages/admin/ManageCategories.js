@@ -20,31 +20,36 @@ class ManageCategories extends Component {
 			categories: [],
 			filteredCategories: [],
 			form: {
-				filter: null
+				filter: ""
 			}
 		};
 
-		axios.get(config.api + '/category')
-		  .then(function (response) {
-		  	this.setState({categories: response.data});
-		  	this.setState({filteredCategories: response.data});
-		  }.bind(this));
+		this.refreshData();
 	}
 
 	removeItem(category){
-		console.log("Removing from parent:");
-		console.log(category);
+        axios.delete(config.api + '/category/' + category.id)
+            .then(function(response){
+                this.refreshData();
+            }.bind(this));
 	}
 
 	handleChange(name, e) {
-		console.log(this.state.categories);
-		console.log(typeof this.state.categories);
 		var change = {form: this.state.form};
 		change.form[name] = e.target.value;
 		this.setState(change);
 
 		this.filterCategories();
 	}
+
+    refreshData(){
+        axios.get(config.api + '/category')
+          .then(function (response) {
+              this.setState({categories: response.data}, () => {
+                this.filterCategories();
+            });
+          }.bind(this));
+    }
 
 	filterCategories(){
 		const categories = this.state.categories.filter(function(item){
@@ -68,7 +73,7 @@ class ManageCategories extends Component {
 						<CardContainer>
 							{(this.state.categories.length !== 0) ? 
 								this.state.filteredCategories.map(function(category){
-									return(<CategoryItemInList category={category} key={category.id} removeHandler={this.removeItem} />);
+									return(<CategoryItemInList category={category} key={category.id} removeHandler={this.removeItem.bind(this)} />);
 								}.bind(this))
 							: <p>No categories yet</p> }
 						</CardContainer>

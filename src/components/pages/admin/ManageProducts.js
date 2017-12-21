@@ -28,9 +28,6 @@ class ManageProducts extends Component {
 	}
 
 	removeItem(product){
-		console.log("Removing from parent:");
-		console.log(product);
-
 		axios.delete(config.api + '/product/' + product.id)
 			.then(function(response){
 				this.refreshData();
@@ -38,8 +35,6 @@ class ManageProducts extends Component {
 	}
 
 	handleChange(name, e) {
-		console.log(this.state.products);
-		console.log(typeof this.state.products);
 		var change = {form: this.state.form};
 		change.form[name] = e.target.value;
 		this.setState(change);
