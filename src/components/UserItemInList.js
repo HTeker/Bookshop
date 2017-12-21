@@ -9,7 +9,7 @@ class UserItemInList extends Component {
 	render() {
 		return (
 			<div className="user-item-in-list">
-				<a href={"/user/" + this.props.user.id + "/edit"}><h4>{this.props.user.name}</h4></a>
+				<a href={"/user/" + this.props.user.email + "/edit"}><h4>{this.props.user.name}</h4></a>
 				<button className="btn secondary-btn" onClick={this.removeItem.bind(this)}>Remove</button>
 			</div>
 		);

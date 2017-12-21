@@ -75,7 +75,7 @@ class ManageUsers extends Component {
 						<CardContainer>
 							{(this.state.users.length !== 0) ? 
 								this.state.filteredUsers.map(function(user){
-									return(<UserItemInList user={user} key={user.id} removeHandler={this.removeItem.bind(this)} />);
+									return(<UserItemInList user={user} key={user.email} removeHandler={this.removeItem.bind(this)} />);
 								}.bind(this))
 							: <p>No users yet</p> }
 						</CardContainer>

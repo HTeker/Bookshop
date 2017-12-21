@@ -40,7 +40,7 @@ ReactDOM.render(
 	        <Route path='/category/:id' component={CategoryDetail} />
 	        <Route path='/user/manage' component={ManageUsers} />
 	        <Route path='/user/create' component={CreateUser} />
-	        <Route path='/user/:id/edit' component={EditUser} />
+	        <Route path='/user/:email/edit' component={EditUser} />
 	        <Route path='/login' component={Login} />
 	        <Route path='/search/:query' component={Search} />
 	        <Route path='/cart' component={Cart} />

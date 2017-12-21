@@ -32,7 +32,7 @@ class EditUser extends Component {
 			}
 		};
 
-		axios.get(config.api + '/user/' + this.props.match.params.id)
+		axios.get(config.api + '/user/' + this.props.match.params.email)
 		  .then(function (response) {
 		  	this.setState({form: response.data});
 		  }.bind(this));
@@ -45,7 +45,7 @@ class EditUser extends Component {
 			this.setState({error: null});
 			const self = this;
 
-			axios.put(config.api + '/user/' + this.props.match.params.id, this.state.form)
+			axios.put(config.api + '/user/' + this.props.match.params.email, this.state.form)
 			  .then(function (response) {
 			  	self.setState({loading: false});
 			  	self.setState({success: response});
@@ -77,7 +77,7 @@ class EditUser extends Component {
 					<Col md={4}>
 					</Col>
 					<Col md={4}>
-						{(this.state.form.id) ?
+						{(this.state.form.email) ?
 							<CardContainer>
 								<h3>Edit User</h3>
 								<label htmlFor="name">Name:</label>
