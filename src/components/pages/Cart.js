@@ -27,9 +27,7 @@ class Cart extends Component {
 	}
 
 	checkout(){
-		if(this.state.query){
-			window.location.href = "//" + window.location.host + "/search/" + this.state.query;
-		}
+		window.location.href = "//" + window.location.host + "/checkout";
 	}
 
 	onItemChange(){

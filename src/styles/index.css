@@ -79,3 +79,7 @@ input.full-width{
 	padding: 5px;
     margin: 5px;
 }
+
+hr{
+	border-top: 0.1px solid #AAAAAA;
+}
