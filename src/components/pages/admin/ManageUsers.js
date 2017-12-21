@@ -20,20 +20,18 @@ class ManageUsers extends Component {
 			users: [],
 			filteredUsers: [],
 			form: {
-				filter: null
+				filter: ""
 			}
 		};
 
-		axios.get(config.api + '/user')
-		  .then(function (response) {
-		  	this.setState({users: response.data});
-		  	this.setState({filteredUsers: response.data});
-		  }.bind(this));
+		this.refreshData();
 	}
 
 	removeItem(user){
-		console.log("Removing from parent:");
-		console.log(user);
+		axios.delete(config.api + '/user/' + user.email)
+			.then(function(response){
+				this.refreshData();
+			}.bind(this));
 	}
 
 	handleChange(name, e) {
@@ -44,6 +42,15 @@ class ManageUsers extends Component {
 		this.setState(change);
 
 		this.filterUsers();
+	}
+
+	refreshData(){
+		axios.get(config.api + '/user')
+		  .then(function (response) {
+		  	this.setState({users: response.data}, () => {
+				this.filterUsers();
+			});
+		  }.bind(this));
 	}
 
 	filterUsers(){
@@ -68,7 +75,7 @@ class ManageUsers extends Component {
 						<CardContainer>
 							{(this.state.users.length !== 0) ? 
 								this.state.filteredUsers.map(function(user){
-									return(<UserItemInList user={user} key={user.id} removeHandler={this.removeItem} />);
+									return(<UserItemInList user={user} key={user.id} removeHandler={this.removeItem.bind(this)} />);
 								}.bind(this))
 							: <p>No users yet</p> }
 						</CardContainer>
