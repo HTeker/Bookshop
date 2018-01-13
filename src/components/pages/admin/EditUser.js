@@ -17,7 +17,7 @@ class EditUser extends Component {
 		this.state = {
 			loading: false,
 			success: null,
-			error: null,
+			errors: null,
 
 			form: {
 				user: '',
@@ -42,24 +42,24 @@ class EditUser extends Component {
 		if(this.state.form.password === this.state.form.passwordConfirm){
 			this.setState({loading: true});
 			this.setState({success: null});
-			this.setState({error: null});
+			this.setState({errors: null});
 			const self = this;
 
 			axios.put(config.api + '/user/' + this.props.match.params.email, this.state.form)
 			  .then(function (response) {
 			  	self.setState({loading: false});
 			  	self.setState({success: response});
-		  		self.setState({error: ''});
+		  		self.setState({errors: ''});
 			  })
 			  .catch(function(error){
 			  	self.setState({loading: false});
 			  	self.setState({success: ''});
-			  	self.setState({error: error.response});
+			  	self.setState({errors: error.response.data.errors});
 			  });
 		}else{
 			this.setState({loading: false});
 		  	this.setState({success: ''});
-		  	this.setState({error: {data: {errors: [{message: 'Password confirmation does not match'}]}}});
+		  	this.setState({errors: ['Password confirmation does not match']});
 		}
 
 	}
@@ -97,7 +97,7 @@ class EditUser extends Component {
 								<label htmlFor="zipcode">Zipcode:</label>
 								<input type="text" name="zipcode" placeholder="Zipcode" className="full-width" value={this.state.form.zipcode} onChange={this.handleChange.bind(this, 'zipcode')} />
 
-								<LoaderAndAlert loading={this.state.loading} success={this.state.success} error={this.state.error} />
+								<LoaderAndAlert loading={this.state.loading} success={this.state.success} errors={this.state.errors} />
 
 								<button className="btn primary-btn btn-full-width" onClick={this.submit.bind(this)}>Edit</button>
 							</CardContainer>

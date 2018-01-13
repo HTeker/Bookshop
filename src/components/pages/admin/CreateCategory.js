@@ -17,7 +17,7 @@ class CreateCategory extends Component {
 		this.state = {
 			loading: false,
 			success: '',
-			error: '',
+			errors: '',
 
 			form: {
 				name: ''
@@ -28,19 +28,19 @@ class CreateCategory extends Component {
 	submit() {
 		this.setState({loading: true});
 		this.setState({success: ''});
-		this.setState({error: ''});
+		this.setState({errors: ''});
 		const self = this;
 
 		axios.post(config.api + '/category', this.state.form)
 		  .then(function (response) {
 		  	self.setState({loading: false});
-		  	self.setState({success: response});
-	  		self.setState({error: ''});
+		  	self.setState({success: response.statusText});
+	  		self.setState({errors: ''});
 		  })
 		  .catch(function(error){
 		  	self.setState({loading: false});
 		  	self.setState({success: ''});
-		  	self.setState({error: error.response});
+		  	self.setState({errors: error.response.data.errors});
 		  });
 	}
 
@@ -62,7 +62,7 @@ class CreateCategory extends Component {
 							<label htmlFor="name">Name:</label>
 							<input type="text" name="name" placeholder="Name" className="full-width" value={this.state.form.name} onChange={this.handleChange.bind(this, 'name')} />
 
-							<LoaderAndAlert loading={this.state.loading} success={this.state.success} error={this.state.error} />
+							<LoaderAndAlert loading={this.state.loading} success={this.state.success} errors={this.state.errors} />
 
 							<button className="btn primary-btn btn-full-width" onClick={this.submit.bind(this)}>Create</button>
 						</CardContainer>

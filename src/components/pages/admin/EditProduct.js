@@ -20,7 +20,7 @@ class EditProduct extends Component {
 
 			loading: false,
 			success: null,
-			error: null,
+			errors: null,
 			
 
 			form: {
@@ -48,19 +48,19 @@ class EditProduct extends Component {
 	submit() {
 		this.setState({loading: true});
 		this.setState({success: null});
-		this.setState({error: null});
+		this.setState({errors: null});
 		const self = this;
 
 		axios.put(config.api + '/product/' + this.props.match.params.id, this.state.form)
 		  .then(function (response) {
 		  	self.setState({loading: false});
-		  	self.setState({success: response});
-	  		self.setState({error: ''});
+		  	self.setState({success: response.statusText});
+	  		self.setState({errors: ''});
 		  })
 		  .catch(function(error){
 		  	self.setState({loading: false});
 		  	self.setState({success: ''});
-		  	self.setState({error: error.response});
+		  	self.setState({errors: error.response.data.errors});
 		  });
 	}
 
@@ -101,7 +101,7 @@ class EditProduct extends Component {
 								<label htmlFor="deliveryDays">Delivery:</label>
 								<input type="number" name="deliveryDays" placeholder="Delivery days" className="full-width" value={this.state.form.deliveryDays} onChange={this.handleChange.bind(this, 'deliveryDays')} />
 
-								<LoaderAndAlert loading={this.state.loading} success={this.state.success} error={this.state.error} />
+								<LoaderAndAlert loading={this.state.loading} success={this.state.success} errors={this.state.errors} />
 
 								<button className="btn primary-btn btn-full-width" onClick={this.submit.bind(this)}>Edit</button>
 							</CardContainer>

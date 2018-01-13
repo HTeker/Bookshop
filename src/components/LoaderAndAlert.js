@@ -19,7 +19,11 @@ class LoaderAndAlert extends Component {
 					<div className="alert alert-error">
 						<ul>
 							{this.props.errors.map(function(error){
-								return (<li key="error">{error}</li>);
+								if(error.message){
+									return (<li key={error.message}>{error.message}</li>);
+								}else{
+									return (<li key={error}>{error}</li>);
+								}
 							})}
 						</ul>
 					</div>

@@ -17,7 +17,7 @@ class EditCategory extends Component {
 		this.state = {
 			loading: false,
 			success: null,
-			error: null,
+			errors: null,
 			
 
 			form: {
@@ -34,19 +34,19 @@ class EditCategory extends Component {
 	submit() {
 		this.setState({loading: true});
 		this.setState({success: null});
-		this.setState({error: null});
+		this.setState({errors: null});
 		const self = this;
 
 		axios.put(config.api + '/category/' + this.props.match.params.id, this.state.form)
 		  .then(function (response) {
 		  	self.setState({loading: false});
-		  	self.setState({success: response});
-	  		self.setState({error: ''});
+		  	self.setState({success: response.statusText});
+	  		self.setState({errors: ''});
 		  })
 		  .catch(function(error){
 		  	self.setState({loading: false});
 		  	self.setState({success: ''});
-		  	self.setState({error: error.response});
+		  	self.setState({errors: error.response.data.errors});
 		  });
 	}
 
@@ -69,7 +69,7 @@ class EditCategory extends Component {
 								<label htmlFor="name">Name:</label>
 								<input type="text" name="name" placeholder="Name" className="full-width" value={this.state.form.name} onChange={this.handleChange.bind(this, 'name')} />
 
-								<LoaderAndAlert loading={this.state.loading} success={this.state.success} error={this.state.error} />
+								<LoaderAndAlert loading={this.state.loading} success={this.state.success} errors={this.state.errors} />
 
 								<button className="btn primary-btn btn-full-width" onClick={this.submit.bind(this)}>Edit</button>
 							</CardContainer>
