@@ -28,7 +28,9 @@ class ManageUsers extends Component {
 	}
 
 	removeItem(user){
-		axios.delete(config.api + '/user/' + user.email)
+		axios.delete(config.api + '/user/' + user.email, {
+				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+			})
 			.then(function(response){
 				this.refreshData();
 			}.bind(this));
@@ -45,7 +47,9 @@ class ManageUsers extends Component {
 	}
 
 	refreshData(){
-		axios.get(config.api + '/user')
+		axios.get(config.api + '/user', {
+				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+			})
 		  .then(function (response) {
 		  	this.setState({users: response.data}, () => {
 				this.filterUsers();

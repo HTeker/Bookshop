@@ -32,7 +32,9 @@ class EditUser extends Component {
 			}
 		};
 
-		axios.get(config.api + '/user/' + this.props.match.params.email)
+		axios.get(config.api + '/user/' + this.props.match.params.email, {
+				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+			})
 		  .then(function (response) {
 		  	this.setState({form: response.data});
 		  }.bind(this));
@@ -45,7 +47,9 @@ class EditUser extends Component {
 			this.setState({errors: null});
 			const self = this;
 
-			axios.put(config.api + '/user/' + this.props.match.params.email, this.state.form)
+			axios.put(config.api + '/user/' + this.props.match.params.email, this.state.form, {
+				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+			})
 			  .then(function (response) {
 			  	self.setState({loading: false});
 			  	self.setState({success: response});
@@ -54,7 +58,9 @@ class EditUser extends Component {
 			  .catch(function(error){
 			  	self.setState({loading: false});
 			  	self.setState({success: ''});
-			  	self.setState({errors: error.response.data.errors});
+			  	error.response.status == 403
+					? self.setState({errors: [error.response.statusText]})
+					: self.setState({errors: error.response.data.errors});
 			  });
 		}else{
 			this.setState({loading: false});
