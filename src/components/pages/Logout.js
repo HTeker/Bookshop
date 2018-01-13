@@ -11,7 +11,9 @@ var env = process.env.NODE_ENV || 'development',
 
 class Logout extends Component {
 
-	componentDidMount() {
+	constructor(props){
+		super(props);
+		
 		sessionStorage.removeItem('token');
 		sessionStorage.removeItem('user');
 
