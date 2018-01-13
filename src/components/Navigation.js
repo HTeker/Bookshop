@@ -50,7 +50,7 @@ class Navigation extends Component {
 						{links.map(function(link){
 							if(link.links){
 								return (
-									<li id={link.id} key={link.url} className="menu-dropdown">
+									<li id={link.id} key={link.url || link.id} className="menu-dropdown">
 										<a href="#">{link.name} <span className="arrow">&#129171;</span></a>
 										<ul>
 											{link.links.map(function(childLink){

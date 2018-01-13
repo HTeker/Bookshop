@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/LoaderAndAlert.css';
 
 class LoaderAndAlert extends Component {
+
 	render() {
 		return (
 			<div>
@@ -11,14 +12,14 @@ class LoaderAndAlert extends Component {
 				: null }
 
 				{(this.props.success) ?
-					<div className="alert alert-success">{this.props.success.statusText}</div>
+					<div className="alert alert-success">{this.props.success}</div>
 				: null }
 
-				{(this.props.error) ?
+				{(this.props.errors) ?
 					<div className="alert alert-error">
 						<ul>
-							{this.props.error.data.errors.map(function(error){
-								return (<li>{error.message}</li>);
+							{this.props.errors.map(function(error){
+								return (<li key="error">{error}</li>);
 							})}
 						</ul>
 					</div>
