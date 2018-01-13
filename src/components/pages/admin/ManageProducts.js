@@ -28,7 +28,9 @@ class ManageProducts extends Component {
 	}
 
 	removeItem(product){
-		axios.delete(config.api + '/product/' + product.id)
+		axios.delete(config.api + '/product/' + product.id, {
+				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+			})
 			.then(function(response){
 				this.refreshData();
 			}.bind(this));

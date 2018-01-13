@@ -51,17 +51,21 @@ class EditProduct extends Component {
 		this.setState({errors: null});
 		const self = this;
 
-		axios.put(config.api + '/product/' + this.props.match.params.id, this.state.form)
-		  .then(function (response) {
-		  	self.setState({loading: false});
-		  	self.setState({success: response.statusText});
-	  		self.setState({errors: ''});
-		  })
-		  .catch(function(error){
-		  	self.setState({loading: false});
-		  	self.setState({success: ''});
-		  	self.setState({errors: error.response.data.errors});
-		  });
+		axios.put(config.api + '/product/' + this.props.match.params.id, this.state.form, {
+				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+			})
+			.then(function (response) {
+				self.setState({loading: false});
+				self.setState({success: response.statusText});
+				self.setState({errors: ''});
+			})
+			.catch(function(error){
+				self.setState({loading: false});
+				self.setState({success: ''});
+				error.response.status == 403
+					? self.setState({errors: [error.response.statusText]})
+					: self.setState({errors: error.response.data.errors});
+			});
 	}
 
 	handleChange(name, e) {

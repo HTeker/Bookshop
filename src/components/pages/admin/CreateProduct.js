@@ -45,17 +45,21 @@ class CreateProduct extends Component {
 		this.setState({errors: ''});
 		const self = this;
 
-		axios.post(config.api + '/product', this.state.form)
-		  .then(function (response) {
-		  	self.setState({loading: false});
-		  	self.setState({success: response.statusText});
-	  		self.setState({errors: ''});
-		  })
-		  .catch(function(error){
-		  	self.setState({loading: false});
-		  	self.setState({success: ''});
-		  	self.setState({errors: error.response.data.errors});
-		  });
+		axios.post(config.api + '/product', this.state.form, {
+				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+			})
+			.then(function (response) {
+				self.setState({loading: false});
+				self.setState({success: response.statusText});
+				self.setState({errors: ''});
+			})
+			.catch(function(error){
+				self.setState({loading: false});
+				self.setState({success: ''});
+				error.response.status == 403
+					? self.setState({errors: [error.response.statusText]})
+					: self.setState({errors: error.response.data.errors});
+			});
 	}
 
 	handleChange(name, e) {
