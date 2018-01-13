@@ -9,18 +9,21 @@ import $ from 'jquery';
 const links = [
 	{name: 'Home', url: '/'},
 	{name: 'Products', url: '/product'},
-	{name: 'Product', id: 'product-dropdown', links: [
+	{name: 'Product', id: 'product-dropdown', adminOnly: true, links: [
 		{name: 'Manage', url: '/product/manage'},
 		{name: 'Create', url: '/product/create'},
 	]},
-	{name: 'Category', id: 'category-dropdown', links: [
+	{name: 'Category', id: 'category-dropdown', adminOnly: true, links: [
 		{name: 'Manage', url: '/category/manage'},
 		{name: 'Create', url: '/category/create'},
 	]},
-	{name: 'User', id: 'user-dropdown', links: [
+	{name: 'User', id: 'user-dropdown', adminOnly: true, links: [
 		{name: 'Manage', url: '/user/manage'},
 		{name: 'Create', url: '/user/create'},
 	]}
+];
+
+const adminLinks = [
 ];
 
 class Navigation extends Component {
@@ -42,24 +45,32 @@ class Navigation extends Component {
 	}
 
 	render() {
+		const user = JSON.parse(sessionStorage.getItem('user'));
+		var isAdmin;
+		if(user){
+			isAdmin = user.isAdmin;
+		}
+
 		return (
 			<div id="navigation-container">
 				<div id="navigation">
 					<ul>
 						{links.map(function(link){
-							if(link.links){
-								return (
-									<li id={link.id} key={link.url || link.id} className="menu-dropdown">
-										<a href="#">{link.name} <span className="arrow">&#129171;</span></a>
-										<ul>
-											{link.links.map(function(childLink){
-												return (<li key={childLink.url}><a href={childLink.url}>{childLink.name}</a></li>);			
-											})}
-										</ul>
-									</li>
-								);
-							}else{
-								return (<li key={link.url}><a href={link.url}>{link.name}</a></li>);
+							if(!link.adminOnly || isAdmin){
+								if(link.links){
+									return (
+										<li id={link.id} key={link.url || link.id} className="menu-dropdown">
+											<a href="#">{link.name} <span className="arrow">&#129171;</span></a>
+											<ul>
+												{link.links.map(function(childLink){
+													return (<li key={childLink.url}><a href={childLink.url}>{childLink.name}</a></li>);			
+												})}
+											</ul>
+										</li>
+									);
+								}else{
+									return (<li key={link.url}><a href={link.url}>{link.name}</a></li>);
+								}
 							}
 						})}
 					</ul>

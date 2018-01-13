@@ -46,7 +46,8 @@ class Login extends Component {
 			axios.post(config.api + '/login', this.state.loginForm)
 			  .then(function (response) {
 			  	self.setState({loginMsg: {loading: false, success: 'Login successful', errors: null}});
-		  		sessionStorage.setItem('token', response.data);
+		  		sessionStorage.setItem('token', response.data.token);
+		  		sessionStorage.setItem('user', JSON.stringify(response.data.user));
 		  		window.location.href = "//" + window.location.host;
 			  })
 			  .catch(function(error){

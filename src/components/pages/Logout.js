@@ -13,6 +13,7 @@ class Logout extends Component {
 
 	componentDidMount() {
 		sessionStorage.removeItem('token');
+		sessionStorage.removeItem('user');
 
 		setTimeout(function () {
 			window.location.href = "//" + window.location.host;
