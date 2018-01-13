@@ -28,7 +28,9 @@ class ManageCategories extends Component {
 	}
 
 	removeItem(category){
-        axios.delete(config.api + '/category/' + category.id)
+        axios.delete(config.api + '/category/' + category.id, {
+				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+			})
             .then(function(response){
                 this.refreshData();
             }.bind(this));

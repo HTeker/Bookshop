@@ -37,7 +37,9 @@ class EditCategory extends Component {
 		this.setState({errors: null});
 		const self = this;
 
-		axios.put(config.api + '/category/' + this.props.match.params.id, this.state.form)
+		axios.put(config.api + '/category/' + this.props.match.params.id, this.state.form, {
+				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+			})
 		  .then(function (response) {
 		  	self.setState({loading: false});
 		  	self.setState({success: response.statusText});
@@ -46,7 +48,9 @@ class EditCategory extends Component {
 		  .catch(function(error){
 		  	self.setState({loading: false});
 		  	self.setState({success: ''});
-		  	self.setState({errors: error.response.data.errors});
+		  	error.response.status == 403
+				? self.setState({errors: [error.response.statusText]})
+				: self.setState({errors: error.response.data.errors});
 		  });
 	}
 
