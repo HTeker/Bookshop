@@ -8,7 +8,6 @@ import $ from 'jquery';
 
 const links = [
 	{name: 'Home', url: '/'},
-	{name: 'Login', url: '/login'},
 	{name: 'Products', url: '/product'},
 	{name: 'Product', id: 'product-dropdown', links: [
 		{name: 'Manage', url: '/product/manage'},
@@ -74,6 +73,12 @@ class Navigation extends Component {
 						        </span>
 							</a>
 						</div>
+
+						<ul>
+							{(sessionStorage.getItem('token')) ?
+								<li><a href="/logout">Logout</a></li>
+							: <li><a href="/login">Login</a></li> }
+						</ul>
 					</div>
 				</div>
 			</div>

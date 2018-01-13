@@ -22,6 +22,7 @@ import EditUser from './components/pages/admin/EditUser';
 import ManageUsers from './components/pages/admin/ManageUsers';
 
 import Login from './components/pages/Login';
+import Logout from './components/pages/Logout';
 import Search from './components/pages/Search';
 import Cart from './components/pages/Cart';
 import Wishlist from './components/pages/customer/Wishlist';
@@ -43,6 +44,7 @@ ReactDOM.render(
 	        <Route path='/user/create' component={CreateUser} />
 	        <Route path='/user/:email/edit' component={EditUser} />
 	        <Route path='/login' component={Login} />
+	        <Route path='/logout' component={Logout} />
 	        <Route path='/search/:query' component={Search} />
 	        <Route path='/cart' component={Cart} />
 	        <Route path='/wishlist' component={Wishlist} />
