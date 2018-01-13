@@ -88,7 +88,7 @@ class Navigation extends Component {
 						<ul>
 							{(sessionStorage.getItem('token')) ?
 								<li><a href="/logout">Logout</a></li>
-							: <li><a href="/login">Login</a></li> }
+							: <li><a href="/login">Login / Signup</a></li> }
 						</ul>
 					</div>
 				</div>
