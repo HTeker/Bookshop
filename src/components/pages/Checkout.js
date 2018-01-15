@@ -62,7 +62,6 @@ class Checkout extends Component {
 		  .catch(function(error){
 		  	self.setState({loading: false});
 		  	self.setState({success: ''});
-		  	console.log(error.response);
 		  	error.response.status == 403 || error.response.status == 400
 				? self.setState({errors: [error.response.statusText]})
 				: self.setState({errors: error.response.data.errors});
