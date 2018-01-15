@@ -25,8 +25,16 @@ class WishlistHelper{
 		}
 	}
 
-	static createWishlist(){
+	static createWishlist(form){
+		if(token){
 
+		}else{
+			var wishlists = WishlistHelper.getWishlists();
+			wishlists.push({id: wishlists.length, name: form.name});
+			localStorage.setItem('wishlists', JSON.stringify(wishlists));
+
+			return {status: 201};
+		}
 	}
 
 	static getWishlistById(id){
