@@ -42,10 +42,14 @@ class Checkout extends Component {
 		};
 	}
 
-	submit(){
+	submitRegistered(user = this.state.currentUser){
+		alert('Order by user token.');
+		console.log('user');
+		console.log(user);
+
 		const self = this;
 
-		axios.post(config.api + '/user/' + this.state.currentUser.email + '/order', this.state.products, {
+		axios.post(config.api + '/user/' + user.email + '/order', this.state.products, {
 				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
 			})
 		  .then(function (response) {
@@ -66,6 +70,38 @@ class Checkout extends Component {
 				? self.setState({errors: [error.response.statusText]})
 				: self.setState({errors: error.response.data.errors});
 		  });
+	}
+
+	submit() {
+		alert();
+		if(this.state.form.password != this.state.form.passwordConfirm){
+			this.setState({success: ''});
+			this.setState({errors: ['The passwords don\'t match']});
+		}else{
+			this.setState({loading: true});
+			this.setState({success: ''});
+			this.setState({errors: null});
+			const self = this;
+
+			axios.post(config.api + '/signup', this.state.form)
+			  .then(function (response) {
+			  	self.setState({loading: false});
+				self.setState({success: ''});
+				self.setState({errors: null});
+
+		  		sessionStorage.setItem('token', response.data.token);
+		  		sessionStorage.setItem('user', JSON.stringify(response.data.user));
+
+		  		self.setState({currentUser: response.data.user}, () => {
+		  			self.submitRegistered();
+		  		});
+			  })
+			  .catch(function(error){
+			  	self.setState({loading: false});
+			  	self.setState({success: ''});
+			  	self.setState({errors: error.response.data.errors});
+			  });
+		}
 	}
 
 	handleChange(name, e) {
@@ -95,6 +131,10 @@ class Checkout extends Component {
 									<input type="text" name="city" placeholder="City" className="full-width" value={this.state.currentUser.city} disabled />
 									<label htmlFor="zipcode">Zipcode:</label>
 									<input type="text" name="zipcode" placeholder="Zipcode" className="full-width" value={this.state.currentUser.zipcode} disabled />
+
+									<LoaderAndAlert loading={this.state.loading} success={this.state.success} errors={this.state.errors} />
+
+									<button className="btn primary-btn btn-full-width" onClick={this.submitRegistered.bind(this)}>Order</button>
 								</div>
 							: 
 								<div>
@@ -114,12 +154,12 @@ class Checkout extends Component {
 									<input type="text" name="city" placeholder="City" className="full-width" value={this.state.city} onChange={this.handleChange.bind(this, 'city')} />
 									<label htmlFor="zipcode">Zipcode:</label>
 									<input type="text" name="zipcode" placeholder="Zipcode" className="full-width" value={this.state.zipcode} onChange={this.handleChange.bind(this, 'zipcode')} />
+
+									<LoaderAndAlert loading={this.state.loading} success={this.state.success} errors={this.state.errors} />
+
+									<button className="btn primary-btn btn-full-width" onClick={this.submit.bind(this)}>Order</button>
 								</div>
 							}
-
-							<LoaderAndAlert loading={this.state.loading} success={this.state.success} errors={this.state.errors} />
-
-							<button className="btn primary-btn btn-full-width" onClick={this.submit.bind(this)}>Order</button>
 						</CardContainer>
 					</Col>
 					<Col md={4}>
