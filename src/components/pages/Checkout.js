@@ -42,14 +42,10 @@ class Checkout extends Component {
 		};
 	}
 
-	submitRegistered(user = this.state.currentUser){
-		alert('Order by user token.');
-		console.log('user');
-		console.log(user);
-
+	submitRegistered(){
 		const self = this;
 
-		axios.post(config.api + '/user/' + user.email + '/order', this.state.products, {
+		axios.post(config.api + '/user/' + this.state.currentUser.email + '/order', this.state.products, {
 				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
 			})
 		  .then(function (response) {
@@ -73,7 +69,6 @@ class Checkout extends Component {
 	}
 
 	submit() {
-		alert();
 		if(this.state.form.password != this.state.form.passwordConfirm){
 			this.setState({success: ''});
 			this.setState({errors: ['The passwords don\'t match']});
