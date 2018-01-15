@@ -52,6 +52,10 @@ class CartHelper{
 
 		return total;
 	}
+
+	static empty(){
+		return localStorage.setItem('cart', JSON.stringify([]));
+	}
 }
 
 export default CartHelper;

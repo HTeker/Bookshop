@@ -27,6 +27,7 @@ import Search from './components/pages/Search';
 import Cart from './components/pages/Cart';
 import Wishlist from './components/pages/customer/Wishlist';
 import Checkout from './components/pages/Checkout';
+import OrderPlaced from './components/pages/OrderPlaced';
 
 ReactDOM.render(
 	<Router history={createBrowserHistory()}>
@@ -49,6 +50,7 @@ ReactDOM.render(
 	        <Route path='/cart' component={Cart} />
 	        <Route path='/wishlist' component={Wishlist} />
 	        <Route path='/checkout' component={Checkout} />
+	        <Route path='/orderplaced' component={OrderPlaced} />
 	        <Route path='*' component={Home} />
 	    </Switch>
 	</Router>
