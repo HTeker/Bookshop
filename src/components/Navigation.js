@@ -9,6 +9,10 @@ import $ from 'jquery';
 const links = [
 	{name: 'Home', url: '/'},
 	{name: 'Products', url: '/product'},
+	{name: 'Wishlists', id: 'wishlist-dropdown', links: [
+		{name: 'Manage', url: '/wishlist/manage'},
+		{name: 'Create', url: '/wishlist/create'},
+	]},
 	{name: 'Product', id: 'product-dropdown', adminOnly: true, links: [
 		{name: 'Manage', url: '/product/manage'},
 		{name: 'Create', url: '/product/create'},

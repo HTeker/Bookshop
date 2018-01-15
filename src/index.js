@@ -7,6 +7,8 @@ import registerServiceWorker from './registerServiceWorker';
 
 import Home from './components/pages/Home';
 
+import ManageWishlists from './components/pages/ManageWishlists';
+
 import ProductDetail from './components/pages/ProductDetail';
 import CreateProduct from './components/pages/admin/CreateProduct';
 import EditProduct from './components/pages/admin/EditProduct';
@@ -48,7 +50,7 @@ ReactDOM.render(
 	        <Route path='/logout' component={Logout} />
 	        <Route path='/search/:query' component={Search} />
 	        <Route path='/cart' component={Cart} />
-	        <Route path='/wishlist' component={Wishlist} />
+	        <Route path='/wishlist/manage' component={ManageWishlists} />
 	        <Route path='/checkout' component={Checkout} />
 	        <Route path='/orderplaced' component={OrderPlaced} />
 	        <Route path='*' component={Home} />
