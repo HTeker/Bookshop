@@ -1,27 +1,19 @@
 class WishlistHelper{
 	static getWishlists(){
-		const wishlists = [{
-			id: 1,
-			name: 'Wishlist #1',
-			UserEmail: 'h.teker@live.nl'
-		},{
-			id: 2,
-			name: 'Wishlist #2',
-			UserEmail: 'h.teker@live.nl'
-		},{
-			id: 3,
-			name: 'Wishlist #3',
-			UserEmail: 'h.teker@live.nl'
-		}];
-
-		// Remove part above, is only for testing
-
-		return JSON.parse(localStorage.getItem('wishlists')) || wishlists;
+		return JSON.parse(localStorage.getItem('wishlists')) || [];
 	}
 
 	static createWishlist(form){
 		var wishlists = WishlistHelper.getWishlists();
-		wishlists.push({id: wishlists.length, name: form.name});
+
+		if(wishlists.length > 0){
+			console.log(wishlists.length);
+			console.log(wishlists[wishlists.length - 1]);
+			wishlists.push({id: (wishlists[wishlists.length - 1].id + 1), name: form.name});	
+		}else{
+			wishlists.push({id: 0, name: form.name});
+		}
+
 		localStorage.setItem('wishlists', JSON.stringify(wishlists));
 
 		return {status: 201};
@@ -60,10 +52,6 @@ class WishlistHelper{
 		}
 
 		return {status: 200};
-	}
-
-	static searchWishlists(query){
-
 	}
 
 	static addProductToWishlistById(id, product){
