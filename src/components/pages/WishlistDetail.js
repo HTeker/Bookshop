@@ -50,7 +50,7 @@ class WishlistDetail extends Component {
 							(this.state.products.map(function(product){
 								return (
 									<CardContainer key={product.id}>
-										{product.name}
+										<a href={"/product/" + product.id}>{product.name}</a>
 										<span className="delete-btn" onClick={() => this.deleteProductFromWishlist(product.id)}><b>X</b></span>
 									</CardContainer>
 								);
