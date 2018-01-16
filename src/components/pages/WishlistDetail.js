@@ -39,7 +39,10 @@ class WishlistDetail extends Component {
 					<Col>
 						<CardContainer>
 							{(this.state.wishlist) ?
-								<h3>{this.state.wishlist.name}</h3>
+								<div>
+									<h3>{this.state.wishlist.name}</h3>
+									<a href={"/wishlist/" + this.props.match.params.id + "/edit"}>Edit</a>
+								</div>
 							: null }
 						</CardContainer>
 

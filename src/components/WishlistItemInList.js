@@ -9,7 +9,7 @@ class WishlistItemInList extends Component {
 	render() {
 		return (
 			<div className="wishlist-item-in-list">
-				<a href={"/wishlist/" + this.props.wishlist.id + "/edit"}><h4>{this.props.wishlist.name}</h4></a>
+				<a href={"/wishlist/" + this.props.wishlist.id}><h4>{this.props.wishlist.name}</h4></a>
 				<button className="btn secondary-btn" onClick={this.removeItem.bind(this)}>Remove</button>
 			</div>
 		);
