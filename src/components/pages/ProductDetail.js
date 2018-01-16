@@ -22,7 +22,7 @@ class ProductDetail extends Component {
 			numberOfItemsInCart: CartHelper.getAllProducts().length,
 			totalPrice: CartHelper.getTotalPrice(),
 			wishlists: WishlistHelper.getWishlists(),
-			selectedWishlist: WishlistHelper.getWishlists()[0]
+			selectedWishlist: WishlistHelper.getWishlists()[0].id
 		};
 
 		axios.get(config.api + '/product/' + this.props.match.params.id)
