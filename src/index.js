@@ -7,9 +7,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 import Home from './components/pages/Home';
 
-import ManageWishlists from './components/pages/ManageWishlists';
+import WishlistDetail from './components/pages/WishlistDetail';
 import CreateWishlist from './components/pages/CreateWishlist';
 import EditWishlist from './components/pages/EditWishlist';
+import ManageWishlists from './components/pages/ManageWishlists';
 
 import ProductDetail from './components/pages/ProductDetail';
 import CreateProduct from './components/pages/admin/CreateProduct';
@@ -55,6 +56,7 @@ ReactDOM.render(
 	        <Route path='/wishlist/manage' component={ManageWishlists} />
 	        <Route path='/wishlist/create' component={CreateWishlist} />
 	        <Route path='/wishlist/:id/edit' component={EditWishlist} />
+	        <Route path='/wishlist/:id' component={WishlistDetail} />
 	        <Route path='/checkout' component={Checkout} />
 	        <Route path='/orderplaced' component={OrderPlaced} />
 	        <Route path='*' component={Home} />

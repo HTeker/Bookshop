@@ -66,15 +66,15 @@ class WishlistHelper{
 
 	}
 
-	static addProductsToWishlist(wishlist, products){
+	static addProductToWishlistById(id, product){
 
 	}
 
-	static getProductsOfWishlist(wishlist){
+	static getProductsOfWishlistById(wishlist){
 
 	}
 
-	static removeProductsFromWishlist(wishlist, products){
+	static removeProductFromWishlist(wishlist, products){
 
 	}
 }

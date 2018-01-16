@@ -7,6 +7,7 @@ import PipeToLocalePrice from '../../pipes/PipeToLocalePrice';
 import axios from 'axios';
 
 import CartHelper from '../../helpers/CartHelper';
+import WishlistHelper from '../../helpers/WishlistHelper';
 
 var env = process.env.NODE_ENV || 'development',
     config = require('../../config')[env];
@@ -19,7 +20,9 @@ class ProductDetail extends Component {
 			product: null,
 			categories: null,
 			numberOfItemsInCart: CartHelper.getAllProducts().length,
-			totalPrice: CartHelper.getTotalPrice()
+			totalPrice: CartHelper.getTotalPrice(),
+			wishlists: WishlistHelper.getWishlists(),
+			selectedWishlist: WishlistHelper.getWishlists()[0]
 		};
 
 		axios.get(config.api + '/product/' + this.props.match.params.id)
@@ -37,6 +40,14 @@ class ProductDetail extends Component {
 		CartHelper.addProduct(this.state.product);
 		this.setState({numberOfItemsInCart: CartHelper.getAllProducts().length});
 		this.setState({totalPrice: CartHelper.getTotalPrice()});
+	}
+
+	addProductToWishlist(){
+		WishlistHelper.addProductToWishlistById(this.state.selectedWishlist, this.state.product);
+	}
+
+	onSelectChange(e) {
+		this.setState({selectedWishlist: e.target.value});
 	}
 
 	render() {
@@ -71,7 +82,18 @@ class ProductDetail extends Component {
 			          		<h1>{PipeToLocalePrice(this.state.product.price)}</h1>
 			          		<p><b>{this.state.product.deliveryDays}</b> days for delivery.</p>
 			          		<button className="btn primary-btn btn-full-width" onClick={this.addProductToCartHelper.bind(this)}>Add to Cart</button>
-			          		<button className="btn secondary-btn btn-full-width">Add to Wishlist</button>
+			          		{(this.state.wishlists.length > 0) ?
+			          			<div>
+				          			<select id="wishlist" onChange={this.onSelectChange.bind(this)} value={this.state.selectedWishlist}>
+				          				{(this.state.wishlists.map(function(wishlist){
+				          					return (
+				          						<option value={wishlist.id}>{wishlist.name}</option>
+				          					);
+				          				}))}
+									</select>
+					          		<button className="btn secondary-btn btn-full-width" onClick={this.addProductToWishlist.bind(this)}>Add to Wishlist</button>
+			          			</div>
+		          			: null }
 			          	</CardContainer>
 			          </Col>
 			        </Row>
