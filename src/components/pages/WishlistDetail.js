@@ -19,6 +19,15 @@ class WishlistDetail extends Component {
 
 	componentDidMount(){
 		this.setState({wishlist: WishlistHelper.getWishlistById(this.props.match.params.id)});
+		this.refreshData();
+	}
+
+	deleteProductFromWishlist(productId) {
+		WishlistHelper.removeProductFromWishlistById(this.state.wishlist.id, productId);
+		this.refreshData();
+	}
+
+	refreshData(){
 		this.setState({products: WishlistHelper.getProductsOfWishlistById(this.props.match.params.id)});
 	}
 
@@ -37,12 +46,13 @@ class WishlistDetail extends Component {
 						{(this.state.products.length > 0) ?
 							(this.state.products.map(function(product){
 								return (
-									<CardContainer>
+									<CardContainer key={product.id}>
 										{product.name}
+										<span className="delete-btn" onClick={() => this.deleteProductFromWishlist(product.id)}><b>X</b></span>
 									</CardContainer>
 								);
-							}))
-						: null }
+							}.bind(this)))
+						: <CardContainer>No products yet</CardContainer> }
 					</Col>
 					<Col></Col>
 				</Row>

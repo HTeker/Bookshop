@@ -83,3 +83,11 @@ input.full-width{
 hr{
 	border-top: 0.1px solid #AAAAAA;
 }
+
+.delete-btn{
+	float: right;
+}
+
+.delete-btn:hover{
+	cursor: pointer;
+}

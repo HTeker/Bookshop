@@ -105,8 +105,20 @@ class WishlistHelper{
 		return [];
 	}
 
-	static removeProductFromWishlist(wishlist, products){
+	static removeProductFromWishlistById(id, productId){
+		var wishlistProducts = JSON.parse(localStorage.getItem('wishlistProducts')) || [];
 
+		for(var i = 0; i < wishlistProducts.length; i++){
+			if(wishlistProducts[i].id == id){
+				for(var j = 0; j < wishlistProducts[i].products.length; j++){
+					if(wishlistProducts[i].products[j].id == productId){
+						wishlistProducts[i].products.splice(j, 1);
+						localStorage.setItem('wishlistProducts', JSON.stringify(wishlistProducts));
+						return;
+					}
+				}
+			}
+		}
 	}
 }
 
