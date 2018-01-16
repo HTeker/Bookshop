@@ -9,6 +9,9 @@ import axios from 'axios';
 import CartHelper from '../../helpers/CartHelper';
 import WishlistHelper from '../../helpers/WishlistHelper';
 
+import LoaderAndAlert from '../LoaderAndAlert';
+
+
 var env = process.env.NODE_ENV || 'development',
     config = require('../../config')[env];
 
@@ -22,7 +25,8 @@ class ProductDetail extends Component {
 			numberOfItemsInCart: CartHelper.getAllProducts().length,
 			totalPrice: CartHelper.getTotalPrice(),
 			wishlists: WishlistHelper.getWishlists(),
-			selectedWishlist: WishlistHelper.getWishlists()[0].id
+			selectedWishlist: WishlistHelper.getWishlists()[0].id,
+			success: ''
 		};
 
 		axios.get(config.api + '/product/' + this.props.match.params.id)
@@ -44,6 +48,7 @@ class ProductDetail extends Component {
 
 	addProductToWishlist(){
 		WishlistHelper.addProductToWishlistById(this.state.selectedWishlist, this.state.product);
+		this.setState({success: 'Added product to wishlist with id: ' + this.state.selectedWishlist});
 	}
 
 	onSelectChange(e) {
@@ -94,7 +99,7 @@ class ProductDetail extends Component {
 				          				}))}
 									</select>
 									<br />
-									<br />
+									<LoaderAndAlert success={this.state.success} />
 					          		<button className="btn secondary-btn btn-full-width" onClick={this.addProductToWishlist.bind(this)}>Add to Wishlist</button>
 			          			</div>
 		          			: null }
