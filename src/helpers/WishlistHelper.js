@@ -7,8 +7,6 @@ class WishlistHelper{
 		var wishlists = WishlistHelper.getWishlists();
 
 		if(wishlists.length > 0){
-			console.log(wishlists.length);
-			console.log(wishlists[wishlists.length - 1]);
 			wishlists.push({id: (wishlists[wishlists.length - 1].id + 1), name: form.name});	
 		}else{
 			wishlists.push({id: 0, name: form.name});

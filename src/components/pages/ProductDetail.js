@@ -82,15 +82,19 @@ class ProductDetail extends Component {
 			          		<h1>{PipeToLocalePrice(this.state.product.price)}</h1>
 			          		<p><b>{this.state.product.deliveryDays}</b> days for delivery.</p>
 			          		<button className="btn primary-btn btn-full-width" onClick={this.addProductToCartHelper.bind(this)}>Add to Cart</button>
+			          		<br />
+			          		<p>Wishlist:</p>
 			          		{(this.state.wishlists.length > 0) ?
 			          			<div>
-				          			<select id="wishlist" onChange={this.onSelectChange.bind(this)} value={this.state.selectedWishlist}>
+				          			<select id="wishlist" onChange={this.onSelectChange.bind(this)} value={this.state.selectedWishlist} style={{width: '100%', padding: '10px'}}>
 				          				{(this.state.wishlists.map(function(wishlist){
 				          					return (
 				          						<option value={wishlist.id}>{wishlist.name}</option>
 				          					);
 				          				}))}
 									</select>
+									<br />
+									<br />
 					          		<button className="btn secondary-btn btn-full-width" onClick={this.addProductToWishlist.bind(this)}>Add to Wishlist</button>
 			          			</div>
 		          			: null }
