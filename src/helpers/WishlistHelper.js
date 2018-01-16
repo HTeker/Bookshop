@@ -67,7 +67,30 @@ class WishlistHelper{
 	}
 
 	static addProductToWishlistById(id, product){
+		var wishlistProducts = JSON.parse(localStorage.getItem('wishlistProducts')) || [];
 
+		// Check if wishlist exists or create
+		for(var i = 0; i < wishlistProducts.length; i++){
+			if(wishlistProducts[i].id == id){
+				// Wishlist exists
+				// Check if product exists or create
+				for(var j = 0; j < wishlistProducts[i].products.length; j++){
+					if(wishlistProducts[i].products[j].id == product.id){
+						return;
+					}
+				}
+
+				wishlistProducts[i].products.push(product);
+				localStorage.setItem('wishlistProducts', JSON.stringify(wishlistProducts));
+				return;
+			}
+		}
+
+		wishlistProducts.push({
+			id: id,
+			products: [product]
+		});
+		localStorage.setItem('wishlistProducts', JSON.stringify(wishlistProducts));
 	}
 
 	static getProductsOfWishlistById(wishlist){
