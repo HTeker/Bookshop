@@ -93,8 +93,16 @@ class WishlistHelper{
 		localStorage.setItem('wishlistProducts', JSON.stringify(wishlistProducts));
 	}
 
-	static getProductsOfWishlistById(wishlist){
+	static getProductsOfWishlistById(id){
+		var wishlistProducts = JSON.parse(localStorage.getItem('wishlistProducts')) || [];
 
+		for(var i = 0; i < wishlistProducts.length; i++){
+			if(wishlistProducts[i].id == id){
+				return wishlistProducts[i].products || [];
+			}
+		}
+
+		return [];
 	}
 
 	static removeProductFromWishlist(wishlist, products){

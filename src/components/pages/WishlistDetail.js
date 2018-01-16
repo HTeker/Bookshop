@@ -53,8 +53,7 @@ class WishlistDetail extends Component {
 
 	componentDidMount(){
 		this.setState({wishlist: WishlistHelper.getWishlistById(this.props.match.params.id)});
-		//this.setState({products: WishlistHelper.getProductsOfWishlistById(this.props.match.params.id)});
-		this.setState({products: products});
+		this.setState({products: WishlistHelper.getProductsOfWishlistById(this.props.match.params.id)});
 	}
 
 	render(){
