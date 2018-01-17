@@ -3,6 +3,9 @@ import '../../../styles/CreateProduct.css';
 import { Row, Col } from 'react-grid-system';
 import axios from 'axios';
 
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+
 import Page from '../../Page';
 import CardContainer from '../../CardContainer';
 import LoaderAndAlert from '../../LoaderAndAlert';
@@ -16,7 +19,7 @@ class CreateProduct extends Component {
 		super(props);
 
 		this.state = {
-			categories: null,
+			categories: [],
 
 			loading: false,
 			success: '',
@@ -30,7 +33,9 @@ class CreateProduct extends Component {
 				imgUrl: '',
 				stock: 0,
 				deliveryDays: 0
-			}
+			},
+
+			selectedCategories: ''
 		};
 
 		axios.get(config.api + '/category')
@@ -49,9 +54,28 @@ class CreateProduct extends Component {
 				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
 			})
 			.then(function (response) {
-				self.setState({loading: false});
-				self.setState({success: response.statusText});
-				self.setState({errors: ''});
+				// Add categories to product
+				var categories = [];
+
+				for(var i = 0; i < self.state.selectedCategories.length; i++){
+					categories.push({id: self.state.selectedCategories[i].value});
+				}
+
+				axios.post(config.api + '/product/' + response.data.id + '/category', categories, {
+					headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+				})
+				.then(function (response){
+					self.setState({loading: false});
+					self.setState({success: response.statusText});
+					self.setState({errors: ''});
+				})
+				.catch(function(error){
+					console.log('error during category');
+					console.log(error);
+					self.setState({loading: false});
+					self.setState({success: ''});
+					self.setState({errors: [error.response.statusText]});
+				});
 			})
 			.catch(function(error){
 				self.setState({loading: false});
@@ -66,6 +90,10 @@ class CreateProduct extends Component {
 		var change = {form: this.state.form};
 		change.form[name] = e.target.value;
 		this.setState(change);
+	}
+
+	handleCategoriesSelectorChange(selectedCategories){
+		this.setState({ selectedCategories });
 	}
 
 	render() {
@@ -85,6 +113,17 @@ class CreateProduct extends Component {
 							<input type="text" name="description" placeholder="Description" className="full-width" value={this.state.form.description} onChange={this.handleChange.bind(this, 'description')} />
 							<label htmlFor="price">Price:</label>
 							<input type="number" name="price" placeholder="Price" min="0.01" step="0.01" className="full-width" value={this.state.form.price} onChange={this.handleChange.bind(this, 'price')} />
+
+							<Select
+								name="categories"
+								value={this.state.selectedCategories}
+								multi={true}
+								onChange={this.handleCategoriesSelectorChange.bind(this)}
+								options={this.state.categories.map(function(category){
+									return {value: category.id, label: category.name};
+								})}
+							/>
+
 							<label htmlFor="imgUrl">Image URL:</label>
 							<input type="text" name="imgUrl" placeholder="Image URL" className="full-width" value={this.state.form.imgUrl} onChange={this.handleChange.bind(this, 'imgUrl')} />
 							
