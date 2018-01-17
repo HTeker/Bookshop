@@ -3,6 +3,9 @@ import '../../../styles/EditProduct.css';
 import { Row, Col } from 'react-grid-system';
 import axios from 'axios';
 
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+
 import Page from '../../Page';
 import CardContainer from '../../CardContainer';
 import LoaderAndAlert from '../../LoaderAndAlert';
@@ -16,7 +19,9 @@ class EditProduct extends Component {
 		super(props);
 
 		this.state = {
-			categories: null,
+			categories: [],
+			savedCategories: [],
+			selectedCategories: [],
 
 			loading: false,
 			success: null,
@@ -43,6 +48,15 @@ class EditProduct extends Component {
 		  .then(function (response) {
 		  	this.setState({categories: response.data});
 		  }.bind(this));
+
+		axios.get(config.api + '/product/' + this.props.match.params.id + '/category')
+			.then(function (response) {
+				var categories = response.data.map(function(category){
+					return {value: category.id, label: category.name};
+				});
+				this.setState({savedCategories: categories});
+				this.setState({selectedCategories: categories});
+			}.bind(this));
 	}
 
 	submit() {
@@ -51,13 +65,49 @@ class EditProduct extends Component {
 		this.setState({errors: null});
 		const self = this;
 
+		var categoriesToDelete = [];
+		
+		for(var i = 0; i < this.state.savedCategories.length; i++){
+			if(!this.state.selectedCategories.includes(this.state.savedCategories[i])){
+				categoriesToDelete.push({id: this.state.savedCategories[i].value});
+			}
+		}
+
+		var categoriesToAdd = [];
+
+		for(var i = 0; i < this.state.selectedCategories.length; i++){
+			if(!this.state.savedCategories.includes(this.state.selectedCategories[i])){
+				categoriesToAdd.push({id: this.state.selectedCategories[i].value});
+			}
+		}
+
 		axios.put(config.api + '/product/' + this.props.match.params.id, this.state.form, {
 				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
 			})
 			.then(function (response) {
-				self.setState({loading: false});
-				self.setState({success: response.statusText});
-				self.setState({errors: ''});
+				axios.delete(config.api + '/product/' + self.props.match.params.id + '/category', {
+					data: categoriesToDelete,
+					headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+				})
+				.then(function (response){
+					axios.post(config.api + '/product/' + self.props.match.params.id + '/category', categoriesToAdd, {
+						headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+					})
+					.then(function (response){
+						self.setState({loading: false});
+						self.setState({success: response.statusText});
+						self.setState({errors: ''});
+					});
+				})
+				.catch(function(error){
+					console.log('error.response');
+					console.log(error.response);
+					self.setState({loading: false});
+					self.setState({success: ''});
+					error.response.status == 403
+						? self.setState({errors: [error.response.statusText]})
+						: self.setState({errors: error.response.data.errors});
+				});
 			})
 			.catch(function(error){
 				self.setState({loading: false});
@@ -72,6 +122,10 @@ class EditProduct extends Component {
 		var change = {form: this.state.form};
 		change.form[name] = e.target.value;
 		this.setState(change);
+	}
+
+	handleCategoriesSelectorChange(selectedCategories){
+		this.setState({ selectedCategories });
 	}
 
 	render() {
@@ -92,6 +146,20 @@ class EditProduct extends Component {
 								<input type="text" name="description" placeholder="Description" className="full-width" value={this.state.form.description} onChange={this.handleChange.bind(this, 'description')} />
 								<label htmlFor="price">Price:</label>
 								<input type="number" name="price" placeholder="Price" step="0.01" className="full-width" value={this.state.form.price} onChange={this.handleChange.bind(this, 'price')} />
+
+								<br />
+								<label htmlFor="categories">Categories:</label>
+								<Select
+									name="categories"
+									value={this.state.selectedCategories}
+									multi={true}
+									onChange={this.handleCategoriesSelectorChange.bind(this)}
+									options={this.state.categories.map(function(category){
+										return {value: category.id, label: category.name};
+									})}
+								/>
+								<br />
+
 								<label htmlFor="imgUrl">Image URL:</label>
 								<input type="text" name="imgUrl" placeholder="Image URL" className="full-width" value={this.state.form.imgUrl} onChange={this.handleChange.bind(this, 'imgUrl')} />
 

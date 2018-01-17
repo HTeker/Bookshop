@@ -114,6 +114,8 @@ class CreateProduct extends Component {
 							<label htmlFor="price">Price:</label>
 							<input type="number" name="price" placeholder="Price" min="0.01" step="0.01" className="full-width" value={this.state.form.price} onChange={this.handleChange.bind(this, 'price')} />
 
+							<br />
+							<label htmlFor="categories">Categories:</label>
 							<Select
 								name="categories"
 								value={this.state.selectedCategories}
@@ -123,6 +125,7 @@ class CreateProduct extends Component {
 									return {value: category.id, label: category.name};
 								})}
 							/>
+							<br />
 
 							<label htmlFor="imgUrl">Image URL:</label>
 							<input type="text" name="imgUrl" placeholder="Image URL" className="full-width" value={this.state.form.imgUrl} onChange={this.handleChange.bind(this, 'imgUrl')} />
