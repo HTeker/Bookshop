@@ -39,7 +39,9 @@ class CreateUser extends Component {
 			this.setState({errors: ''});
 			const self = this;
 
-			axios.post(config.api + '/user', this.state.form)
+			axios.post(config.api + '/user', this.state.form, {
+				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+			  })
 			  .then(function (response) {
 			  	self.setState({loading: false});
 			  	self.setState({success: response.statusText});

@@ -34,6 +34,7 @@ import Statistics from './components/pages/admin/Statistics';
 import Search from './components/pages/Search';
 import Cart from './components/pages/Cart';
 import Wishlist from './components/pages/customer/Wishlist';
+import Orders from './components/pages/customer/Orders';
 import Checkout from './components/pages/Checkout';
 import OrderPlaced from './components/pages/OrderPlaced';
 
@@ -56,6 +57,7 @@ ReactDOM.render(
 	        <Route path='/logout' component={Logout} />
 	        <Route path='/search/:query' component={Search} />
 	        <Route path='/cart' component={Cart} />
+	        <Route path='/orders' component={Orders} />
 	        <Route path='/wishlist/manage' component={ManageWishlists} />
 	        <Route path='/wishlist/create' component={CreateWishlist} />
 	        <Route path='/wishlist/:id/edit' component={EditWishlist} />

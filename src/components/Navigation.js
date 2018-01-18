@@ -9,6 +9,7 @@ import $ from 'jquery';
 const links = [
 	{name: 'Home', url: '/'},
 	{name: 'Products', url: '/product'},
+	{name: 'Orders', url: '/orders', userOnly: true},
 	{name: 'Wishlists', id: 'wishlist-dropdown', links: [
 		{name: 'Manage', url: '/wishlist/manage'},
 		{name: 'Create', url: '/wishlist/create'},
@@ -51,7 +52,10 @@ class Navigation extends Component {
 
 	render() {
 		const user = JSON.parse(sessionStorage.getItem('user'));
+		var token = sessionStorage.getItem('token');
+
 		var isAdmin;
+		
 		if(user){
 			isAdmin = user.isAdmin;
 		}
@@ -61,7 +65,7 @@ class Navigation extends Component {
 				<div id="navigation">
 					<ul>
 						{links.map(function(link){
-							if(!link.adminOnly || isAdmin){
+							if((!link.userOnly || token) && (!link.adminOnly || isAdmin)){
 								if(link.links){
 									return (
 										<li id={link.id} key={link.url || link.id} className="menu-dropdown">
