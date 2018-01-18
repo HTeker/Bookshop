@@ -28,6 +28,9 @@ import ManageUsers from './components/pages/admin/ManageUsers';
 
 import Login from './components/pages/Login';
 import Logout from './components/pages/Logout';
+
+import Statistics from './components/pages/admin/Statistics';
+
 import Search from './components/pages/Search';
 import Cart from './components/pages/Cart';
 import Wishlist from './components/pages/customer/Wishlist';
@@ -59,6 +62,7 @@ ReactDOM.render(
 	        <Route path='/wishlist/:id' component={WishlistDetail} />
 	        <Route path='/checkout' component={Checkout} />
 	        <Route path='/orderplaced' component={OrderPlaced} />
+	        <Route path='/statistics' component={Statistics} />
 	        <Route path='*' component={Home} />
 	    </Switch>
 	</Router>

@@ -24,7 +24,8 @@ const links = [
 	{name: 'User', id: 'user-dropdown', adminOnly: true, links: [
 		{name: 'Manage', url: '/user/manage'},
 		{name: 'Create', url: '/user/create'},
-	]}
+	]},
+	{name: 'Statistics', url: '/statistics', adminOnly: true}
 ];
 
 const adminLinks = [
