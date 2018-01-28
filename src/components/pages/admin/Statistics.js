@@ -84,7 +84,7 @@ class Statistics extends Component {
 				<Row>
 					<Col md={8}>
 						<CardContainer>
-							<h3>Heatmap</h3>
+							<h3>Heatmap of Previous Orders</h3>
 							<MapWithAMarker
 								googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnMgPPbPeCQKL4TvKRW5Dw26wYHOE14pk&libraries=visualization"
 								loadingElement={<div style={{ height: `100%` }} />}
@@ -108,7 +108,7 @@ class Statistics extends Component {
 							</div>
 						</CardContainer>
 						<CardContainer>
-							<h3>Products out of Stock:</h3>
+							<h3>Products out of Stock</h3>
 							{this.state.productsNotInStock.map(function(product){
 								return (
 									<div className="product"><span className="name"><a href={"/product/" + product.id}>{product.name}</a></span></div>
