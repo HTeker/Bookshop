@@ -10,12 +10,18 @@ class Sidebar extends Component {
     super(props);
 
     this.state = {
-      categories: []
+      randomCategories: [],
+      newCategories: []
     };
 
-    axios.get(config.api + '/category')
+    axios.get(config.api + '/category/random')
       .then(function (response) {
-        this.setState({categories: response.data});
+        this.setState({randomCategories: response.data.slice(0, 6)});
+      }.bind(this));
+
+    axios.get(config.api + '/category/newest')
+      .then(function (response) {
+        this.setState({newCategories: response.data.slice(0, 6)});
       }.bind(this));
   }
 
@@ -23,9 +29,9 @@ class Sidebar extends Component {
     return (
       <div>
       	<CardContainer>
-      		<h3>Popular Categories</h3>
+      		<h3>Random Categories</h3>
       		<ul>
-            {this.state.categories.map(function(category){
+            {this.state.randomCategories.map(function(category){
               return(<li key={category.id}><a href={"/category/" + category.id}>{category.name}</a></li>);
             })}
       		</ul>
@@ -33,7 +39,7 @@ class Sidebar extends Component {
         <CardContainer>
           <h3>New Categories</h3>
           <ul>
-            {this.state.categories.map(function(category){
+            {this.state.newCategories.map(function(category){
               return(<li key={category.id}><a href={"/category/" + category.id}>{category.name}</a></li>);
             })}
           </ul>

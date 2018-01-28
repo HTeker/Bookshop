@@ -16,12 +16,18 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      products: []
+      randomProducts: [],
+      newProducts: []
     };
 
-    axios.get(config.api + '/product')
+    axios.get(config.api + '/product/random')
       .then(function (response) {
-        this.setState({products: response.data.slice(0, 6)});
+        this.setState({randomProducts: response.data.slice(0, 6)});
+      }.bind(this));
+
+    axios.get(config.api + '/product/newest')
+      .then(function (response) {
+        this.setState({newProducts: response.data.slice(0, 6)});
       }.bind(this));
   }
 
@@ -34,20 +40,14 @@ class Home extends Component {
           </Col>
           <Col md={9}>
             <CardContainer>
-              <h3>Bestselling Books</h3>
-              {this.state.products.map(function(product){
+              <h3>Random Books</h3>
+              {this.state.randomProducts.map(function(product){
                 return(<ProductItem product={product} key={product.id} />);
               })}
             </CardContainer>
             <CardContainer>
               <h3>New Books</h3>
-              {this.state.products.map(function(product){
-                return(<ProductItem product={product} key={product.id} />);
-              })}
-            </CardContainer>
-            <CardContainer>
-              <h3>Best Rated Books</h3>
-              {this.state.products.map(function(product){
+              {this.state.newProducts.map(function(product){
                 return(<ProductItem product={product} key={product.id} />);
               })}
             </CardContainer>
