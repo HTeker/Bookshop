@@ -25,7 +25,7 @@ class ProductDetail extends Component {
 			numberOfItemsInCart: CartHelper.getAllProducts().length,
 			totalPrice: CartHelper.getTotalPrice(),
 			wishlists: WishlistHelper.getWishlists(),
-			selectedWishlist: WishlistHelper.getWishlists()[0].id,
+			selectedWishlist: (WishlistHelper.getWishlists()[0]) ? WishlistHelper.getWishlists()[0].id : null,
 			success: ''
 		};
 

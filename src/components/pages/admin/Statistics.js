@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-grid-system';
+import axios from 'axios';
 
 import Page from '../../Page';
 import CardContainer from '../../CardContainer';
@@ -22,17 +23,40 @@ import HeatmapLayer from "react-google-maps/lib/components/visualization/Heatmap
   </GoogleMap>
 );*/
 
+const google = window.google;
+
+var env = process.env.NODE_ENV || 'development',
+    config = require('../../../config')[env];
+
+var data = [];
+
+axios.get(config.api + '/orders', {
+		headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+	})
+	.then(function (response) {
+		response.data.forEach(function(customer){
+			if(customer.lat && customer.lng && customer.orders.length > 0){
+				//console.log(window.google);
+				data.push(new window.google.maps.LatLng(customer.lat, customer.lng));
+			}
+		});
+	}.bind(this));
+
 const MapWithAMarker = withScriptjs(withGoogleMap(props =>
   <GoogleMap
     defaultZoom={8}
-    defaultCenter={{lat: 37.775, lng: -122.434}}
+    defaultCenter={{lat: 52.3702160, lng: 4.8951680}}
   >
-    <HeatmapLayer options={{radius: 100}} data={[new window.google.maps.LatLng(37.775, -122.434)]} />
+    <HeatmapLayer options={{radius: 10}} data={data} />
   </GoogleMap>
 ));
 
 
 class Statistics extends Component {
+	componentDidMount(){
+		console.log(window.google);
+	}
+
 	render() {
 		return (
 			<Page id="statistics">
