@@ -7,6 +7,8 @@ import '../../../styles/Statistics.css';
 import Page from '../../Page';
 import CardContainer from '../../CardContainer';
 
+import {PieChart} from 'react-easy-chart';
+
 import {
   withScriptjs,
   withGoogleMap,
@@ -59,6 +61,7 @@ class Statistics extends Component {
 		super(props);
 
 		this.state = {
+			products: [],
 			productsNotInStock: []
 		};
 
@@ -67,6 +70,11 @@ class Statistics extends Component {
 		})
 		.then(function(response){
 			this.setState({productsNotInStock: response.data});
+		}.bind(this));
+
+		axios.get(config.api + '/product')
+		.then(function(response){
+			this.setState({products: response.data});
 		}.bind(this));
 	}
 
@@ -87,10 +95,20 @@ class Statistics extends Component {
 					</Col>
 					<Col md={4}>
 						<CardContainer>
-							<h3>Charts</h3>
+							<h3>Products in/out of Stock</h3>
+							<div className="chart-container">
+								<PieChart
+									labels
+									size={250}
+									data={[
+									{ key: 'In Stock: ' + (this.state.products.length - this.state.productsNotInStock.length), value: this.state.products.length - this.state.productsNotInStock.length },
+									{ key: 'Out of Stock: ' + this.state.productsNotInStock.length, value: this.state.productsNotInStock.length }
+									]}
+								/>
+							</div>
 						</CardContainer>
 						<CardContainer>
-							<h3>Products not in stock:</h3>
+							<h3>Products out of Stock:</h3>
 							{this.state.productsNotInStock.map(function(product){
 								return (
 									<div className="product"><span className="name"><a href={"/product/" + product.id}>{product.name}</a></span></div>

@@ -5,3 +5,7 @@
 	text-overflow: ellipsis;
 	display: inline-block;
 }
+
+.chart-container{
+	text-align: center;
+}
