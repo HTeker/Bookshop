@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Row, Col } from 'react-grid-system';
 import axios from 'axios';
 
+import '../../../styles/Statistics.css';
+
 import Page from '../../Page';
 import CardContainer from '../../CardContainer';
 
@@ -53,8 +55,19 @@ const MapWithAMarker = withScriptjs(withGoogleMap(props =>
 
 
 class Statistics extends Component {
-	componentDidMount(){
-		console.log(window.google);
+	constructor(props){
+		super(props);
+
+		this.state = {
+			productsNotInStock: []
+		};
+
+		axios.get(config.api + '/product/not-in-stock', {
+			headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+		})
+		.then(function(response){
+			this.setState({productsNotInStock: response.data});
+		}.bind(this));
 	}
 
 	render() {
@@ -75,6 +88,14 @@ class Statistics extends Component {
 					<Col md={4}>
 						<CardContainer>
 							<h3>Charts</h3>
+						</CardContainer>
+						<CardContainer>
+							<h3>Products not in stock:</h3>
+							{this.state.productsNotInStock.map(function(product){
+								return (
+									<div className="product"><span className="name"><a href={"/product/" + product.id}>{product.name}</a></span></div>
+								);
+							})}
 						</CardContainer>
 					</Col>
 				</Row>
