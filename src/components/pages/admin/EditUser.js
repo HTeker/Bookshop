@@ -41,33 +41,26 @@ class EditUser extends Component {
 	}
 
 	submit() {
-		if(this.state.form.password === this.state.form.passwordConfirm){
-			this.setState({loading: true});
-			this.setState({success: null});
-			this.setState({errors: null});
-			const self = this;
+		this.setState({loading: true});
+		this.setState({success: null});
+		this.setState({errors: null});
+		const self = this;
 
-			axios.put(config.api + '/user/' + this.props.match.params.email, this.state.form, {
-				headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
-			})
-			  .then(function (response) {
-			  	self.setState({loading: false});
-			  	self.setState({success: response});
-		  		self.setState({errors: ''});
-			  })
-			  .catch(function(error){
-			  	self.setState({loading: false});
-			  	self.setState({success: ''});
-			  	error.response.status == 403
-					? self.setState({errors: [error.response.statusText]})
-					: self.setState({errors: error.response.data.errors});
-			  });
-		}else{
-			this.setState({loading: false});
-		  	this.setState({success: ''});
-		  	this.setState({errors: ['Password confirmation does not match']});
-		}
-
+		axios.put(config.api + '/user/' + this.props.match.params.email, this.state.form, {
+			headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
+		})
+		  .then(function (response) {
+		  	self.setState({loading: false});
+		  	self.setState({success: response.statusText});
+	  		self.setState({errors: ''});
+		  })
+		  .catch(function(error){
+		  	self.setState({loading: false});
+		  	self.setState({success: ''});
+		  	error.response.status == 403
+				? self.setState({errors: [error.response.statusText]})
+				: self.setState({errors: error.response.data.errors});
+		  });
 	}
 
 	handleChange(name, e) {
@@ -90,10 +83,6 @@ class EditUser extends Component {
 								<input type="text" name="name" placeholder="Name" className="full-width" value={this.state.form.name} onChange={this.handleChange.bind(this, 'name')} />
 								<label htmlFor="email">E-mail:</label>
 								<input type="email" name="email" placeholder="E-mail" className="full-width" value={this.state.form.email} onChange={this.handleChange.bind(this, 'email')} />
-								<label htmlFor="password">Password:</label>
-								<input type="password" name="password" placeholder="Password" step="0.01" className="full-width" value={this.state.form.password} onChange={this.handleChange.bind(this, 'password')} />
-								<label htmlFor="passwordConfirm">Password Confirm:</label>
-								<input type="password" name="passwordConfirm" placeholder="Password Confirm" className="full-width" value={this.state.form.passwordConfirm} onChange={this.handleChange.bind(this, 'passwordConfirm')} />
 								<label htmlFor="street">Street:</label>
 								<input type="text" name="street" placeholder="Street" className="full-width" value={this.state.form.street} onChange={this.handleChange.bind(this, 'street')} />
 								<label htmlFor="number">Number:</label>
