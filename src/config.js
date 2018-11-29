@@ -1,6 +1,6 @@
 var config = {
     development: {
-        api: '//localhost:8080'
+        api: '//project-bookshop-api.herokuapp.com/'
     }
 };
 module.exports = config;
